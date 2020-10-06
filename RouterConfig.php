@@ -16,6 +16,7 @@
     $r->addRoute("visualizarGenero/:GENERO","GET","peliculasController","VisualizarGenero");
     $r->addRoute("login", "GET", "userController", "VisualizarLogin");
     $r->addRoute("verifyUser", "POST", "userController", "VerifyUser");
+    $r->addRoute("logout","GET","userController","LogOut");
     // //Esto lo veo en TasksView
     // $r->addRoute("insert", "POST", "TasksController", "InsertTask");
 
@@ -24,7 +25,7 @@
     // $r->addRoute("edit/:ID", "GET", "TasksController", "EditTask");
 
     // //Ruta por defecto.
-    // $r->setDefaultRoute("TasksController", "Home");
+    //$r->setDefaultRoute("peliculasController", "Home");
 
     // //Advance
     // $r->addRoute("autocompletar", "GET", "TasksAdvanceController", "AutoCompletar");

@@ -17,7 +17,7 @@
             <h1>CINEMA</h1>
             <img src="imagenes/logo/1.2.png" alt="logo" class="logo">
             {if isset($UserEmail_s)}
-                <h2>{$UserEmail_s}</h2>
+                <h1>Bienvenido: {$UserEmail_s}</h1>
             {/if}
 
         </header>
@@ -26,7 +26,11 @@
             <ul class="navigation">
                 <li> <a href="home"> Inicio </a> </li>
                 <li> <a href="generos"> Generos </a> </li>
-                <li> <a href="login"> Login </a> </li>
+                {if isset($UserEmail_s)}
+                    <li> <a href="logout"> Logout </a> </li>
+                {else}   
+                    <li> <a href="login"> Login </a> </li>
+                {/if}
             </ul>
         </nav>
         

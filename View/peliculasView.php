@@ -16,10 +16,13 @@ class peliculasView{
         $smarty = new Smarty();
         //$smarty->assign('titulo_s', $this->title);
         session_start();
-        
-        echo ($_SESSION['name']);
+        if (isset($_SESSION['email'])){
+            //echo "está seteado";
+            $smarty->assign('UserEmail_s', $_SESSION['email']);
+        }else{
+            //echo "no esta seteado";//por ahora para testear
+        }
         $smarty->assign('peliculasConGenero_s', $peliculasConGenero);
-        $smarty->assign('UserEmail_s', $name);
         $smarty->display('templates/home.tpl'); // muestro el template 
     }
 
@@ -30,6 +33,13 @@ class peliculasView{
     function ShowGeneros($Generos){
         $smarty = new Smarty();
         $smarty->assign('generos_s', $Generos);
+        session_start();
+        if (isset($_SESSION['email'])){
+            //echo "está seteado";
+            $smarty->assign('UserEmail_s', $_SESSION['email']);
+        }else{
+            //echo "no esta seteado";//por ahora para testear
+        }
         $smarty->display('templates/generos.tpl');
     }
 

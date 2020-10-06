@@ -328,6 +328,13 @@ a{
 li a{
     color: black;
 }
+
+h3{
+    color: white;
+    font-family: serif;
+    font-size: 37px;
+}
+
 /*fin de retoque*/
 
 

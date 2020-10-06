@@ -22,13 +22,15 @@ class userController{
         $passWord = $_POST['input_password'];
         
         if (isset($user_mail)){
-            $usserFromDB = $this->model->GetUser($user_mail);
+            $userFromDB = $this->model->GetUser($user_mail);
             
-            if(isset($usserFromDB) && $usserFromDB){
-                if(password_verify($passWord, $usserFromDB->password)){
+            if(isset($userFromDB) && $userFromDB){
+                if(password_verify($passWord, $userFromDB->password)){
                     session_start();
-                    $_SESSION['name'] = $userFromDB->email; 
-                    header("Location:".BASE_URL."home");
+                    $_SESSION['email'] = $userFromDB->email;
+                    //print_r($_SESSION['email'] = $userFromDB->email);
+                    //echo "paso por aca";
+                    header("Location:".BASE_URL."/home");
                 }else{
                     $this->view->ShowLogIn("Contraseña incorrecta");
                 }
@@ -37,5 +39,11 @@ class userController{
             }
 
         }
+    }
+
+    function LogOut(){
+        session_start();
+        session_destroy();
+        header("Location:".BASE_URL."/home");
     }
 }
