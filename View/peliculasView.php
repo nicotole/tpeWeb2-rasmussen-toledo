@@ -15,7 +15,11 @@ class peliculasView{
     function ShowHome($peliculasConGenero){
         $smarty = new Smarty();
         //$smarty->assign('titulo_s', $this->title);
+        session_start();
+        
+        echo ($_SESSION['name']);
         $smarty->assign('peliculasConGenero_s', $peliculasConGenero);
+        $smarty->assign('UserEmail_s', $name);
         $smarty->display('templates/home.tpl'); // muestro el template 
     }
 
@@ -41,4 +45,6 @@ class peliculasView{
         $smarty->assign('genero_s',$genero_nombre);
         $smarty->display('templates/peliculasPorGenero.tpl');
     }
+
+  
 }

@@ -16,13 +16,17 @@
             <img class="imgMenu"src="imagenes/menu.png" alt="">
             <h1>CINEMA</h1>
             <img src="imagenes/logo/1.2.png" alt="logo" class="logo">
+            {if isset($UserEmail_s)}
+                <h2>{$UserEmail_s}</h2>
+            {/if}
+
         </header>
         
         <nav>
             <ul class="navigation">
                 <li> <a href="home"> Inicio </a> </li>
                 <li> <a href="generos"> Generos </a> </li>
-                <li> Registrarse </li>
+                <li> <a href="login"> Login </a> </li>
             </ul>
         </nav>
         

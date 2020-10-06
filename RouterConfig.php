@@ -2,6 +2,7 @@
     require_once 'Controller/peliculasController.php';
     //require_once 'Controller/TasksAdvanceController.php';
     require_once 'RouterClass.php';
+    require_once 'Controller/userController.php';
     
     // CONSTANTES PARA RUTEO
     define("BASE_URL", 'http://'.$_SERVER["SERVER_NAME"].':'.$_SERVER["SERVER_PORT"].dirname($_SERVER["PHP_SELF"]));
@@ -13,6 +14,8 @@
     $r->addRoute("generos", "GET", "peliculasController", "Generos");//URL; METODO; clase; funcion a usar de la clase
     $r->addRoute("visualizarItem/:TITULO","GET","peliculasController","VisualizarItem");
     $r->addRoute("visualizarGenero/:GENERO","GET","peliculasController","VisualizarGenero");
+    $r->addRoute("login", "GET", "userController", "VisualizarLogin");
+    $r->addRoute("verifyUser", "POST", "userController", "VerifyUser");
     // //Esto lo veo en TasksView
     // $r->addRoute("insert", "POST", "TasksController", "InsertTask");
 
