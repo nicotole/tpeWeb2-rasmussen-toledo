@@ -19,4 +19,5 @@ class userView{
         $smarty->display('templates/login.tpl');
     }
 
+    
 }

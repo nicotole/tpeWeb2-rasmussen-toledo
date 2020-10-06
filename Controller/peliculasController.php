@@ -39,5 +39,24 @@ class peliculasController{
         $this->view->ShowPeliculasPorGenero($peliculasPorGenero, $genero_nombre); 
     }
 
-   
+    function Administrar(){
+        // $peliculas = $this->model->GetPeliculas();
+        // $peliculasConGenero = $this->model->GetPeliculasConGenero();
+        $peliculas = $this->model->GetPeliculasYGenero();
+        $this->view->ShowAdministrar($peliculas);
+    }
+
+    function BorrarPelicula($params = null){
+        session_start();
+        if (isset($_SESSION['email']) && $_SESSION['superUser'] == 1){
+            $pelicula_id = $params[':ID'];//Este id pasa magico desde el router como declaramos la ruta
+            $this->model->BorrarPelicula($pelicula_id);//pasamos el id para que lo borre el model
+            header("Location:".BASE_URL."/administrar");//le hacemos recargar la pagina para que se vea el cambio    
+        }else{
+            header("Location:".BASE_URL."/login");
+        }
+        
+    }
+    
+
 }

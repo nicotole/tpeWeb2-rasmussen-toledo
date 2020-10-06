@@ -28,7 +28,7 @@ class peliculasModel{
 
     }
 
-    function GetPeliculasConGenero(){
+    function GetPeliculasConGenero(){//retorna tabla con nombre de la pelicula y su genero
         //$sentencia = $this->db->prepare("SELECT * FROM peliculas INNER JOIN genero ON peliculas.titulo = genero.nombre");
         $sentencia = $this->db->prepare("SELECT peliculas.titulo, genero.nombre FROM peliculas INNER JOIN genero ON peliculas.id_genero = genero.id_genero");
         $sentencia->execute();
@@ -48,4 +48,17 @@ class peliculasModel{
         return $sentencia->fetchAll(PDO::FETCH_OBJ);   
     }
 
+    function GetPeliculasYGenero(){
+        $sentencia = $this->db->prepare("SELECT * FROM genero , peliculas WHERE peliculas.id_genero = genero.id_genero");//selecciona de genero y peliculas y pones donde estan relacionadas. por id en este caso
+        $sentencia->execute();
+        // $test = $sentencia->fetchAll(PDO::FETCH_OBJ);
+        // print_r($test[0]);
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    function BorrarPelicula($id){
+        $sentencia = $this->db->prepare("DELETE FROM peliculas WHERE id=?");
+        $sentencia->execute(array($id));
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
 }

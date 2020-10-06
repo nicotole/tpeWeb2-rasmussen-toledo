@@ -28,8 +28,8 @@ class userController{
                 if(password_verify($passWord, $userFromDB->password)){
                     session_start();
                     $_SESSION['email'] = $userFromDB->email;
-                    //print_r($_SESSION['email'] = $userFromDB->email);
-                    //echo "paso por aca";
+                    $_SESSION['superuser'] = $userFromDB->superUser;
+                    //echo $_SESSION['seperuser'];
                     header("Location:".BASE_URL."/home");
                 }else{
                     $this->view->ShowLogIn("Contraseña incorrecta");
@@ -46,4 +46,6 @@ class userController{
         session_destroy();
         header("Location:".BASE_URL."/home");
     }
+
+    
 }

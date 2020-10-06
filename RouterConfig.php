@@ -17,6 +17,8 @@
     $r->addRoute("login", "GET", "userController", "VisualizarLogin");
     $r->addRoute("verifyUser", "POST", "userController", "VerifyUser");
     $r->addRoute("logout","GET","userController","LogOut");
+    $r->addRoute("administrar", "GET", "peliculasController","Administrar");
+    $r->addRoute("borrar/:ID","GET","peliculasController","BorrarPelicula");
     // //Esto lo veo en TasksView
     // $r->addRoute("insert", "POST", "TasksController", "InsertTask");
 

@@ -31,6 +31,9 @@
                 {else}   
                     <li> <a href="login"> Login </a> </li>
                 {/if}
+                {if isset($superUser_s) && $superUser_s == 1}
+                    <li> <a href="administrar"> Administrar </a> </li>
+                {/if}
             </ul>
         </nav>
         
