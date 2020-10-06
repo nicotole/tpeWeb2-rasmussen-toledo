@@ -48,7 +48,7 @@ class peliculasController{
 
     function BorrarPelicula($params = null){
         session_start();
-        if (isset($_SESSION['email']) && $_SESSION['superUser'] == 1){
+        if ( isset($_SESSION['email']) && ( $_SESSION['superuser'] == 1 ) ){// para que no pueda borrar solo pasando parametros por la barra
             $pelicula_id = $params[':ID'];//Este id pasa magico desde el router como declaramos la ruta
             $this->model->BorrarPelicula($pelicula_id);//pasamos el id para que lo borre el model
             header("Location:".BASE_URL."/administrar");//le hacemos recargar la pagina para que se vea el cambio    
@@ -56,6 +56,16 @@ class peliculasController{
             header("Location:".BASE_URL."/login");
         }
         
+    }
+
+    function SubirPelicula(){//no usamos params porque params es para get
+        session_start();
+        if ( isset($_SESSION['email']) && ( $_SESSION['superuser'] == 1 ) ){
+            $this->model->insertarPelicula();
+            header("Location:".BASE_URL."/administrar");
+        }else{
+            header("Location:".BASE_URL."/login");
+        }
     }
     
 
