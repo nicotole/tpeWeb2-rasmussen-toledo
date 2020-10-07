@@ -20,8 +20,6 @@ class peliculasView{
             //echo "está seteado";
             $smarty->assign('UserEmail_s', $_SESSION['email']);
             $smarty->assign('superUser_s', $_SESSION['superuser']);
-        }else{
-            //echo "no esta seteado";//por ahora para testear
         }
         $smarty->assign('peliculasConGenero_s', $peliculasConGenero);
         $smarty->display('templates/home.tpl'); // muestro el template 
@@ -70,7 +68,7 @@ class peliculasView{
         $smarty->display('templates/peliculasPorGenero.tpl');
     }
 
-    function ShowAdministrar($peliculas){//peliculas es un arreglo de obj pelicula
+    function ShowAdministrar($peliculas, $generos){//peliculas es un arreglo de obj pelicula
         $smarty = new Smarty();
         session_start();
         if (isset($_SESSION['email'])){
@@ -78,10 +76,23 @@ class peliculasView{
             $smarty->assign('UserEmail_s', $_SESSION['email']);
             $smarty->assign('superUser_s', $_SESSION['superuser']);
             $smarty->assign('peliculas_s', $peliculas);
+            $smarty->assign('generos_s',$generos);
             $smarty->display('templates/admin.tpl');
         }else{
             header("Location:".BASE_URL."/login");//si no hay sesion iniciada manda a login
         }
     }
   
+    function ShowEditPelicula($peliculas, $id_pelicula,$generos){
+        $smarty = new Smarty();
+        //session_start();//error,no hace falta porque ya esta iniciada
+        $smarty->assign('peliculas_s', $peliculas);
+        $smarty->assign('generos_s', $generos);
+        $smarty->assign('id_pelicula_s', $id_pelicula);
+        $smarty->assign('UserEmail_s', $_SESSION['email']);
+        $smarty->assign('superUser_s', $_SESSION['superuser']);
+        $smarty->display('templates/admin.tpl');
+        
+    }
+
 }

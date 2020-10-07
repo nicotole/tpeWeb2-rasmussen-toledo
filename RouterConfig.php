@@ -20,6 +20,9 @@
     $r->addRoute("administrar", "GET", "peliculasController","Administrar");
     $r->addRoute("borrar/:ID","GET","peliculasController","BorrarPelicula");
     $r->addRoute("subirPelicula","POST","peliculasController","SubirPelicula");
+    $r->addRoute("editar/:ID","GET","peliculasController","EditarPelicula");
+    $r->addRoute("guardarPelicula/:ID","POST","peliculasController","GuardarPelicula");
+
     // //Esto lo veo en TasksView
     // $r->addRoute("insert", "POST", "TasksController", "InsertTask");
 

@@ -21,6 +21,13 @@ class peliculasModel{
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
 
+    function GetPeliculaPorID($id){
+        $sentencia = $this->db->prepare("SELECT * FROM peliculas WHERE id=?");
+        $sentencia->execute(array($id));
+        //print_r($sentencia->fetch(PDO::FETCH_OBJ)); 
+        return $sentencia->fetch(PDO::FETCH_OBJ);
+    } 
+
     function GetGeneros(){
         $sentencia = $this->db->prepare("SELECT * FROM genero");
         $sentencia->execute();
@@ -71,7 +78,7 @@ class peliculasModel{
             $sentencia = $this->db->prepare("INSERT INTO peliculas(titulo, id_genero, sinopsis, duracion, puntuacion, precio) VALUES(?,?,?,?,?,?)");
             $sentencia->execute(array($_POST['titulo'], $arrGenero[0]->id_genero, $_POST['sinopsis'], $_POST['duracion'], $_POST['puntuacion'], $_POST['precio']));
         }else{
-            echo "no esta seteado el genero amigoide";
+           
             $sentencia = $this->db->prepare("INSERT INTO genero(nombre) VALUES(?)");//creamos el genero
             $sentencia->execute(array($_POST['genero']));//creamos el genero
 
@@ -83,4 +90,39 @@ class peliculasModel{
             $sentencia->execute(array($_POST['titulo'], $arrGenero[0]->id_genero, $_POST['sinopsis'], $_POST['duracion'], $_POST['puntuacion'], $_POST['precio']));
         }
     }
+
+    function EditarPelicula($id){
+        $genero = $this->db->prepare("SELECT * FROM genero WHERE nombre=?");
+        $genero->execute(array($_POST['genero']));
+        $arrGenero = $genero->fetchAll(PDO::FETCH_OBJ);
+        // print_r($arrGenero);
+        // echo $id;
+        // print_r($_POST);
+        if (isset($arrGenero[0])){
+            $sentencia = $this->db->prepare("UPDATE peliculas SET titulo=?, sinopsis=?, duracion=?, id_genero=?, puntuacion=?, precio=? WHERE id=?");
+            $sentencia->execute(array( $_POST['titulo'] , $_POST['sinopsis'] , $_POST['duracion'] , $arrGenero[0]->id_genero, $_POST['puntuacion'] , $_POST['precio'], $id ));
+        }else{
+            $sentencia = $this->db->prepare("INSERT INTO genero(nombre) VALUES(?)");//creamos el genero
+            $sentencia->execute(array($_POST['genero']));//creamos el genero
+
+            $genero = $this->db->prepare("SELECT * FROM genero WHERE nombre=?");//todo de genero del nombre que quiero
+            $genero->execute(array($_POST['genero']));//pedimos el genero
+            $arrGenero = $genero->fetchAll(PDO::FETCH_OBJ);//pedimos el genero
+            // print_r($arrGenero);
+            $sentencia = $this->db->prepare("UPDATE peliculas SET titulo=?, sinopsis=?, duracion=?, id_genero=?, puntuacion=?, precio=? WHERE id=?");
+            $sentencia->execute(array( $_POST['titulo'] , $_POST['sinopsis'] , $_POST['duracion'] , $arrGenero[0]->id_genero, $_POST['puntuacion'] , $_POST['precio'], $id ));
+        }
+
+        // function ModificarLibro($id_libro, $id_genero, $titulo, $descripcion, $autor, $editorial, $edad){
+        //     $sentencia = $this->db->prepare("update libro set id_genero=?, titulo=?, descripcion=?, autor=?, editorial=?, edad=? where id_libro=?");
+        //     $sentencia->execute(array($id_genero, $titulo, $descripcion, $autor, $editorial, $edad, $id_libro));
+        // }
+
+        // function MarkAsCompletedTask($task_id){
+        //     $sentencia = $this->db->prepare("UPDATE task SET completed=1 WHERE id=?");
+        //     $sentencia->execute(array($task_id));
+        
+        // }
+    }
+
 }
