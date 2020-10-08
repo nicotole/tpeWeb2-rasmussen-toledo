@@ -27,18 +27,9 @@
     $r->addRoute("guardarGenero/:ID","POST","peliculasYGeneroController","GuardarGenero");
     $r->addRoute("subirGenero","POST","peliculasYGeneroController","SubirGenero");
 
-    // //Esto lo veo en TasksView
-    // $r->addRoute("insert", "POST", "TasksController", "InsertTask");
-
-    // $r->addRoute("delete/:ID", "GET", "TasksController", "BorrarLaTaskQueVienePorParametro");
-    // $r->addRoute("completar/:ID", "GET", "TasksController", "MarkAsCompletedTask");
-    // $r->addRoute("edit/:ID", "GET", "TasksController", "EditTask");
 
     // //Ruta por defecto.
-    //$r->setDefaultRoute("peliculasYGeneroController", "Home");
-
-    // //Advance
-    // $r->addRoute("autocompletar", "GET", "TasksAdvanceController", "AutoCompletar");
+    $r->setDefaultRoute("peliculasYGeneroController", "Home");
 
     // //run
     $r->route($_GET['action'], $_SERVER['REQUEST_METHOD']);  
