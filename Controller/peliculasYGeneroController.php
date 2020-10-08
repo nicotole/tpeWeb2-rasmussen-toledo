@@ -1,17 +1,17 @@
 <?php
 
-require_once "./View/peliculasView.php";
+require_once "./View/peliculasYGeneroView.php";
 require_once "./Model/peliculasModel.php";
 require_once "./Model/generoModel.php";
 
-class peliculasController{
+class peliculasYGeneroController{
 
     private $view;
     private $model;
     private $modelGenero;
 
     function __construct(){
-        $this->view = new peliculasView();
+        $this->view = new peliculasYGeneroView();
         $this->model = new peliculasModel();
         $this->modelGenero = new generoModel();
     }

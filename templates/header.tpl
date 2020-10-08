@@ -14,10 +14,10 @@
         <!-- Inicio header y barra -->
         <header>
             <img class="imgMenu"src="imagenes/menu.png" alt="">
-            <h1>CINEMA</h1>
             <img src="imagenes/logo/1.2.png" alt="logo" class="logo">
+            <h1>CINEMA</h1>
             {if isset($UserEmail_s)}
-                <h1>Bienvenido: {$UserEmail_s}</h1>
+                <h3>Bienvenido: {$UserEmail_s}</h3>
             {/if}
 
         </header>
