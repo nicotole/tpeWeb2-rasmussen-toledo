@@ -68,21 +68,21 @@ class peliculasModel{
         $genero->execute(array($_POST['genero']));//le asignamos ese nombre
         $arrGenero = $genero->fetchAll(PDO::FETCH_OBJ);//lo pedimos a la  base de datos y me retorna un arreglo de lo buscado, en este caso solo una pos
         
-        if (isset($arrGenero[0])){//hacemos la movida del if porque no sabemos el genero
+        //if (isset($arrGenero[0])){//hacemos la movida del if porque no sabemos el genero
             $sentencia = $this->db->prepare("INSERT INTO peliculas(titulo, id_genero, sinopsis, duracion, puntuacion, precio) VALUES(?,?,?,?,?,?)");
             $sentencia->execute(array($_POST['titulo'], $arrGenero[0]->id_genero, $_POST['sinopsis'], $_POST['duracion'], $_POST['puntuacion'], $_POST['precio']));
-        }else{
+        // }else{
            
-            $sentencia = $this->db->prepare("INSERT INTO genero(nombre) VALUES(?)");//creamos el genero
-            $sentencia->execute(array($_POST['genero']));//creamos el genero
+        //     $sentencia = $this->db->prepare("INSERT INTO genero(nombre) VALUES(?)");//creamos el genero
+        //     $sentencia->execute(array($_POST['genero']));//creamos el genero
 
-            $genero = $this->db->prepare("SELECT * FROM genero WHERE nombre=?");//todo de genero del nombre que quiero
-            $genero->execute(array($_POST['genero']));//pedimos el genero
-            $arrGenero = $genero->fetchAll(PDO::FETCH_OBJ);//pedimos el genero
+        //     $genero = $this->db->prepare("SELECT * FROM genero WHERE nombre=?");//todo de genero del nombre que quiero
+        //     $genero->execute(array($_POST['genero']));//pedimos el genero
+        //     $arrGenero = $genero->fetchAll(PDO::FETCH_OBJ);//pedimos el genero
 
-            $sentencia = $this->db->prepare("INSERT INTO peliculas(titulo, id_genero, sinopsis, duracion, puntuacion, precio) VALUES(?,?,?,?,?,?)");
-            $sentencia->execute(array($_POST['titulo'], $arrGenero[0]->id_genero, $_POST['sinopsis'], $_POST['duracion'], $_POST['puntuacion'], $_POST['precio']));
-        }
+        //     $sentencia = $this->db->prepare("INSERT INTO peliculas(titulo, id_genero, sinopsis, duracion, puntuacion, precio) VALUES(?,?,?,?,?,?)");
+        //     $sentencia->execute(array($_POST['titulo'], $arrGenero[0]->id_genero, $_POST['sinopsis'], $_POST['duracion'], $_POST['puntuacion'], $_POST['precio']));
+        // }
     }
 
     function EditarPelicula($id){
@@ -92,20 +92,20 @@ class peliculasModel{
         // print_r($arrGenero);
         // echo $id;
         // print_r($_POST);
-        if (isset($arrGenero[0])){
+        //if (isset($arrGenero[0])){
             $sentencia = $this->db->prepare("UPDATE peliculas SET titulo=?, sinopsis=?, duracion=?, id_genero=?, puntuacion=?, precio=? WHERE id=?");
             $sentencia->execute(array( $_POST['titulo'] , $_POST['sinopsis'] , $_POST['duracion'] , $arrGenero[0]->id_genero, $_POST['puntuacion'] , $_POST['precio'], $id ));
-        }else{
-            $sentencia = $this->db->prepare("INSERT INTO genero(nombre) VALUES(?)");//creamos el genero
-            $sentencia->execute(array($_POST['genero']));//creamos el genero
+        // }else{
+        //     $sentencia = $this->db->prepare("INSERT INTO genero(nombre) VALUES(?)");//creamos el genero
+        //     $sentencia->execute(array($_POST['genero']));//creamos el genero
 
-            $genero = $this->db->prepare("SELECT * FROM genero WHERE nombre=?");//todo de genero del nombre que quiero
-            $genero->execute(array($_POST['genero']));//pedimos el genero
-            $arrGenero = $genero->fetchAll(PDO::FETCH_OBJ);//pedimos el genero
-            // print_r($arrGenero);
-            $sentencia = $this->db->prepare("UPDATE peliculas SET titulo=?, sinopsis=?, duracion=?, id_genero=?, puntuacion=?, precio=? WHERE id=?");
-            $sentencia->execute(array( $_POST['titulo'] , $_POST['sinopsis'] , $_POST['duracion'] , $arrGenero[0]->id_genero, $_POST['puntuacion'] , $_POST['precio'], $id ));
-        }
+        //     $genero = $this->db->prepare("SELECT * FROM genero WHERE nombre=?");//todo de genero del nombre que quiero
+        //     $genero->execute(array($_POST['genero']));//pedimos el genero
+        //     $arrGenero = $genero->fetchAll(PDO::FETCH_OBJ);//pedimos el genero
+        //     // print_r($arrGenero);
+        //     $sentencia = $this->db->prepare("UPDATE peliculas SET titulo=?, sinopsis=?, duracion=?, id_genero=?, puntuacion=?, precio=? WHERE id=?");
+        //     $sentencia->execute(array( $_POST['titulo'] , $_POST['sinopsis'] , $_POST['duracion'] , $arrGenero[0]->id_genero, $_POST['puntuacion'] , $_POST['precio'], $id ));
+        // }
     }
 
     
