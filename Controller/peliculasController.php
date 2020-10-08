@@ -2,15 +2,18 @@
 
 require_once "./View/peliculasView.php";
 require_once "./Model/peliculasModel.php";
+require_once "./Model/generoModel.php";
 
 class peliculasController{
 
     private $view;
     private $model;
+    private $modelGenero;
 
     function __construct(){
         $this->view = new peliculasView();
         $this->model = new peliculasModel();
+        $this->modelGenero = new generoModel();
     }
 
     function Home(){
@@ -23,7 +26,7 @@ class peliculasController{
     }
 
     function Generos(){
-        $Generos = $this->model->GetGeneros();
+        $Generos = $this->modelGenero->GetGeneros();
         $this->view->ShowGeneros($Generos);
     }
 
@@ -43,7 +46,7 @@ class peliculasController{
         // $peliculas = $this->model->GetPeliculas();
         // $peliculasConGenero = $this->model->GetPeliculasConGenero();
         $peliculas = $this->model->GetPeliculasYGenero();
-        $generos = $this->model->GetGeneros();
+        $generos = $this->modelGenero->GetGeneros();
         $this->view->ShowAdministrar($peliculas, $generos);
     }
 
@@ -74,7 +77,7 @@ class peliculasController{
         if ( isset($_SESSION['email']) && ( $_SESSION['superuser'] == 1 ) ){
             $id_pelicula = $params[':ID'];
             $peliculas = $this->model->GetPeliculasYGenero();//pido toda la tabla de peliculas junto con la tambla de genero, viene todo en un arreglo
-            $generos = $this->model->GetGeneros();
+            $generos = $this->modelGenero->GetGeneros();
             $this->view->ShowEditPelicula($peliculas, $id_pelicula,$generos);
         }else{
             header("Location:".BASE_URL."/login");
@@ -86,9 +89,9 @@ class peliculasController{
         $this->model->EditarPelicula($params[':ID']);
         header("Location:".BASE_URL."/administrar");
     }
-
+//-----------
     function BorrarGenero($params = null){
-        $this->model->BorrarGenero($params[':ID']);
+        $this->modelGenero->BorrarGenero($params[':ID']);
         header("Location:".BASE_URL."/administrar");
     }
 
@@ -96,7 +99,7 @@ class peliculasController{
         session_start();
         if ( isset($_SESSION['email']) && ( $_SESSION['superuser'] == 1 ) ){
             $peliculas = $this->model->GetPeliculasYGenero();
-            $generos = $this->model->GetGeneros();
+            $generos = $this->modelGenero->GetGeneros();
             $this->view->ShowEditGenero($peliculas, $generos, $params[':ID']);
         }else{
             header("Location:".BASE_URL."/login");
@@ -104,12 +107,12 @@ class peliculasController{
     }
 
     function GuardarGenero($params = null){
-        $this->model->GuardarGenero($params[':ID']);
+        $this->modelGenero->GuardarGenero($params[':ID']);
         header("Location:".BASE_URL."/administrar");
     }
 
     function SubirGenero(){
-        $this->model->SubirGenero();
+        $this->modelGenero->SubirGenero();
         header("Location:".BASE_URL."/administrar");
     }
 }

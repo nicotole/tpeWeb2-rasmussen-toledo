@@ -26,13 +26,13 @@
             <ul class="navigation">
                 <li> <a href="home"> Inicio </a> </li>
                 <li> <a href="generos"> Generos </a> </li>
-                {if isset($UserEmail_s)}
+                {if isset($superUser_s) && $superUser_s == 1}
+                    <li> <a href="administrar"> Administrar </a> </li>
+                {/if}
+                 {if isset($UserEmail_s)}
                     <li> <a href="logout"> Logout </a> </li>
                 {else}   
                     <li> <a href="login"> Login </a> </li>
-                {/if}
-                {if isset($superUser_s) && $superUser_s == 1}
-                    <li> <a href="administrar"> Administrar </a> </li>
                 {/if}
             </ul>
         </nav>
