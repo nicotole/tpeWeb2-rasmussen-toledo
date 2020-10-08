@@ -112,17 +112,22 @@ class peliculasModel{
             $sentencia = $this->db->prepare("UPDATE peliculas SET titulo=?, sinopsis=?, duracion=?, id_genero=?, puntuacion=?, precio=? WHERE id=?");
             $sentencia->execute(array( $_POST['titulo'] , $_POST['sinopsis'] , $_POST['duracion'] , $arrGenero[0]->id_genero, $_POST['puntuacion'] , $_POST['precio'], $id ));
         }
-
-        // function ModificarLibro($id_libro, $id_genero, $titulo, $descripcion, $autor, $editorial, $edad){
-        //     $sentencia = $this->db->prepare("update libro set id_genero=?, titulo=?, descripcion=?, autor=?, editorial=?, edad=? where id_libro=?");
-        //     $sentencia->execute(array($id_genero, $titulo, $descripcion, $autor, $editorial, $edad, $id_libro));
-        // }
-
-        // function MarkAsCompletedTask($task_id){
-        //     $sentencia = $this->db->prepare("UPDATE task SET completed=1 WHERE id=?");
-        //     $sentencia->execute(array($task_id));
-        
-        // }
     }
+
+    function BorrarGenero($id){
+        $sentencia = $this->db->prepare("DELETE FROM genero WHERE  id_genero=?");
+        $sentencia->execute(array($id));
+    }
+
+    function GuardarGenero($id){
+        $sentencia = $this->db->prepare("UPDATE genero SET nombre=? WHERE id_genero=?");
+        $sentencia->execute(array($_POST['nombre'], $id));
+    }
+
+    function SubirGenero(){
+        $sentencia = $this->db->prepare("INSERT INTO genero(nombre) VALUES(?)");//creamos el genero
+        $sentencia->execute(array($_POST['nombre']));//creamos el genero
+    }
+
 
 }

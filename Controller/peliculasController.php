@@ -87,4 +87,29 @@ class peliculasController{
         header("Location:".BASE_URL."/administrar");
     }
 
+    function BorrarGenero($params = null){
+        $this->model->BorrarGenero($params[':ID']);
+        header("Location:".BASE_URL."/administrar");
+    }
+
+    function EditarGenero($params = null){
+        session_start();
+        if ( isset($_SESSION['email']) && ( $_SESSION['superuser'] == 1 ) ){
+            $peliculas = $this->model->GetPeliculasYGenero();
+            $generos = $this->model->GetGeneros();
+            $this->view->ShowEditGenero($peliculas, $generos, $params[':ID']);
+        }else{
+            header("Location:".BASE_URL."/login");
+        }
+    }
+
+    function GuardarGenero($params = null){
+        $this->model->GuardarGenero($params[':ID']);
+        header("Location:".BASE_URL."/administrar");
+    }
+
+    function SubirGenero(){
+        $this->model->SubirGenero();
+        header("Location:".BASE_URL."/administrar");
+    }
 }
