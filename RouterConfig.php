@@ -28,6 +28,13 @@
     $r->addRoute("subirGenero","POST","peliculasYGeneroController","SubirGenero");
     $r->addRoute("adminPeliculas", "GET","peliculasYGeneroController", "AdminPeliculas");
     $r->addRoute("adminGeneros","GET","peliculasYGeneroController","AdminGeneros");
+    $r->addRoute("registrarse","GET","userController","Registrarse");
+    $r->addRoute("registrarUsuario","POST","userController","RegistrarUsuario");    
+    $r->addRoute("adminUsuarios","GET","userController","AdminUsuarios");
+    $r->addRoute("borrarUsuario/:ID","GET","userController","BorrarUsuario");   
+    $r->addRoute("administrador/:ID","GET","userController","SetSuperUsuario"); 
+    $r->addRoute("no-administrador/:ID","GET","userController","SetNoSuperUsuario");
+
 
     // //Ruta por defecto.
     $r->setDefaultRoute("peliculasYGeneroController", "Home");

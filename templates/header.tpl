@@ -16,8 +16,8 @@
             <img class="imgMenu"src="imagenes/menu.png" alt="">
             <img src="imagenes/logo/1.2.png" alt="logo" class="logo">
             <h1>CINEMA</h1>
-            {if isset($UserEmail_s)}
-                <h3>Bienvenido: {$UserEmail_s}</h3>
+            {if isset($UserName_s)}
+                <h3>Bienvenido: {$UserName_s}</h3>
             {/if}
 
         </header>
@@ -32,6 +32,7 @@
                  {if isset($UserEmail_s)}
                     <li> <a href="logout"> Logout </a> </li>
                 {else}   
+                    <li> <a href="registrarse"> Registrarse </a> </li>
                     <li> <a href="login"> Login </a> </li>
                 {/if}
             </ul>

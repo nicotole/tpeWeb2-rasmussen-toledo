@@ -21,4 +21,35 @@ class userModel{
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
 
+    function InsertarUsuario(){
+
+        $password = $_POST['contraseña'];
+        $hash = password_hash($password, PASSWORD_DEFAULT);
+
+        $sentencia = $this->db->prepare("INSERT INTO usuarios(userName, email, password, superUser) VALUES(?,?,?,?)");
+        $sentencia->execute(array($_POST['userName'], $_POST['email'], $hash, 0));
+    }
+
+    function GetUsuarios(){
+        $sentencia = $this->db->prepare("SELECT * FROM usuarios");
+        $sentencia->execute();
+        return $sentencia->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    function BorrarUsuario($id){
+        $sentencia = $this->db->prepare("DELETE FROM usuarios WHERE id=?");
+        $sentencia->execute(array($id));
+    }
+
+    function SetSuperUsuario($id){
+        $sentencia = $this->db->prepare("UPDATE usuarios SET superUser=? WHERE id=?");
+        $sentencia->execute(array(1, $id));
+    }
+
+    function SetNoSuperUsuario($id){
+        $sentencia = $this->db->prepare("UPDATE usuarios SET superUser=? WHERE id=?");
+        $sentencia->execute(array(0, $id));
+    }
+
+    
 }

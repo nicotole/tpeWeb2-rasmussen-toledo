@@ -43,11 +43,16 @@ class peliculasYGeneroController{
     }
 
     function Administrar(){
-        // $peliculas = $this->model->GetPeliculas();
-        // $peliculasConGenero = $this->model->GetPeliculasConGenero();
-        $peliculas = $this->model->GetPeliculasYGenero();
-        $generos = $this->modelGenero->GetGeneros();
-        $this->view->ShowAdministrar($peliculas, $generos);
+        session_start();
+        if ( isset($_SESSION['email']) && ( $_SESSION['superuser'] == 1 ) ){
+            // $peliculas = $this->model->GetPeliculas();
+            // $peliculasConGenero = $this->model->GetPeliculasConGenero();
+            $peliculas = $this->model->GetPeliculasYGenero();
+            $generos = $this->modelGenero->GetGeneros();
+            $this->view->ShowAdministrar($peliculas, $generos);
+        }else{
+            header("Location:".BASE_URL."/login");
+        }
     }
 
     function AdminPeliculas(){
@@ -137,4 +142,7 @@ class peliculasYGeneroController{
         $this->modelGenero->SubirGenero();
         header("Location:".BASE_URL."/adminGeneros");
     }
+
+
+   
 }
