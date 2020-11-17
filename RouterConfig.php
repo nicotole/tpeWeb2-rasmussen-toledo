@@ -26,7 +26,8 @@
     $r->addRoute("editarGenero/:ID","GET","peliculasYGeneroController","EditarGenero");
     $r->addRoute("guardarGenero/:ID","POST","peliculasYGeneroController","GuardarGenero");
     $r->addRoute("subirGenero","POST","peliculasYGeneroController","SubirGenero");
-
+    $r->addRoute("adminPeliculas", "GET","peliculasYGeneroController", "AdminPeliculas");
+    $r->addRoute("adminGeneros","GET","peliculasYGeneroController","AdminGeneros");
 
     // //Ruta por defecto.
     $r->setDefaultRoute("peliculasYGeneroController", "Home");

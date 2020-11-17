@@ -91,8 +91,7 @@ class peliculasYGeneroView{
         $smarty->assign('id_pelicula_s', $id_pelicula);
         $smarty->assign('UserEmail_s', $_SESSION['email']);
         $smarty->assign('superUser_s', $_SESSION['superuser']);
-        $smarty->display('templates/admin.tpl');
-        
+        $smarty->display('templates/adminPeliculas.tpl');
     }
 
     function ShowEditGenero($peliculas, $generos, $id){
@@ -103,6 +102,29 @@ class peliculasYGeneroView{
         $smarty->assign('UserEmail_s', $_SESSION['email']);
         $smarty->assign('superUser_s', $_SESSION['superuser']);
         $smarty->display('templates/admin.tpl');
+    }
+
+    function AdminPeliculas($peliculasConGenero, $generos){
+        $smarty = new Smarty();
+        $smarty->assign('peliculas_s',$peliculasConGenero);
+        $smarty->assign('generos_s', $generos);
+        $smarty->assign('UserEmail_s', $_SESSION['email']);
+        $smarty->assign('superUser_s', $_SESSION['superuser']);
+        $smarty->display('templates/adminPeliculas.tpl');
+    }
+
+    function AdminGeneros($generos){
+        $smarty = new Smarty();
+        //session_start();
+        if (isset($_SESSION['email'])){
+            //echo "está seteado";
+            $smarty->assign('UserEmail_s', $_SESSION['email']);
+            $smarty->assign('superUser_s', $_SESSION['superuser']);
+            $smarty->assign('generos_s',$generos);
+            $smarty->display('templates/adminGeneros.tpl');
+        }else{
+            header("Location:".BASE_URL."/login");//si no hay sesion iniciada manda a login
+        }
     }
 
 }

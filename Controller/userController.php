@@ -37,7 +37,6 @@ class userController{
             }else{
                 $this->view->ShowLogIn("El usuario no existe");
             }
-
         }
     }
 
