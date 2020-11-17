@@ -75,8 +75,8 @@ class peliculasYGeneroView{
             //echo "está seteado";
             $smarty->assign('UserEmail_s', $_SESSION['email']);
             $smarty->assign('superUser_s', $_SESSION['superuser']);
-            $smarty->assign('peliculas_s', $peliculas);
-            $smarty->assign('generos_s',$generos);
+           // $smarty->assign('peliculas_s', $peliculas);
+            //$smarty->assign('generos_s',$generos);
             $smarty->display('templates/admin.tpl');
         }else{
             header("Location:".BASE_URL."/login");//si no hay sesion iniciada manda a login
@@ -101,7 +101,7 @@ class peliculasYGeneroView{
         $smarty->assign('id_genero_s', $id);
         $smarty->assign('UserEmail_s', $_SESSION['email']);
         $smarty->assign('superUser_s', $_SESSION['superuser']);
-        $smarty->display('templates/admin.tpl');
+        $smarty->display('templates/adminGeneros.tpl');
     }
 
     function AdminPeliculas($peliculasConGenero, $generos){

@@ -336,6 +336,13 @@ h3{
 
 }
 
+.botonesAdmin{
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-around; */
+    margin: 12px 0px 12px 0px;
+}
+
 /*fin de retoque*/
 
 

@@ -114,7 +114,7 @@ class peliculasYGeneroController{
 //-----------
     function BorrarGenero($params = null){
         $this->modelGenero->BorrarGenero($params[':ID']);
-        header("Location:".BASE_URL."/administrar");
+        header("Location:".BASE_URL."/adminGeneros");
     }
 
     function EditarGenero($params = null){
@@ -130,11 +130,11 @@ class peliculasYGeneroController{
 
     function GuardarGenero($params = null){
         $this->modelGenero->GuardarGenero($params[':ID']);
-        header("Location:".BASE_URL."/administrar");
+        header("Location:".BASE_URL."/adminGeneros");
     }
 
     function SubirGenero(){
         $this->modelGenero->SubirGenero();
-        header("Location:".BASE_URL."/administrar");
+        header("Location:".BASE_URL."/adminGeneros");
     }
 }
