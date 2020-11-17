@@ -1,5 +1,4 @@
 {include file="header.tpl"}
-     {* holis *}
 {foreach from=$peliculasConGenero_s item=peliculaConGenero}
     <div class="pelicula">
         <ul>
