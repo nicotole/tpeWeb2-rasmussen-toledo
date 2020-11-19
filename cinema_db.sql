@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-10-2020 a las 23:26:41
--- Versión del servidor: 10.4.13-MariaDB
--- Versión de PHP: 7.2.31
+-- Tiempo de generación: 19-11-2020 a las 14:51:55
+-- Versión del servidor: 10.4.11-MariaDB
+-- Versión de PHP: 7.4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,6 +24,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `comentarios`
+--
+
+CREATE TABLE `comentarios` (
+  `id` int(11) NOT NULL,
+  `id_pelicula` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `puntaje` int(1) NOT NULL,
+  `comentario` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `genero`
 --
 
@@ -37,11 +51,11 @@ CREATE TABLE `genero` (
 --
 
 INSERT INTO `genero` (`id_genero`, `nombre`) VALUES
-(23, 'Ciencia ficción'),
 (24, 'Comedia'),
 (25, 'Acción'),
 (26, 'Terror'),
-(27, 'Drama');
+(28, 'Drama'),
+(29, 'Ciencia ficción');
 
 -- --------------------------------------------------------
 
@@ -64,14 +78,10 @@ CREATE TABLE `peliculas` (
 --
 
 INSERT INTO `peliculas` (`id`, `titulo`, `sinopsis`, `duracion`, `id_genero`, `puntuacion`, `precio`) VALUES
-(28, 'Star Wars: episodio III - la venganza de los Sith', 'a trama describe una época en la que los Caballeros Jedi se han esparcido por toda la galaxia, dirigiendo un ejército clon masivo para enfrentar a los Separatistas Galácticos, tres años después del in', '2:00', 23, 3, 500),
 (29, 'Swiss Army Man', 'Hank (Paul Dano), un náufrago en una isla del Pacífico que está a punto de ahorcarse, ve llegar a la playa un cadáver (Daniel Radcliffe). Intenta reanimarlo, pero el cadáver lo mira sin dejar de solta', '1:40', 24, 5, 500),
 (30, ' Baby Driver', 'Baby es un chofer especializado en fugas que, enamorado, pretende dejar la vida criminal y empezar de cero con la mujer que ama. Cuando el jefe de una banda de gánsters le obliga a trabajar para él y ', '2:00', 25, 5, 300),
 (31, ' John Wick', 'Reeves interpreta a John Wick, un sicario retirado que busca venganza por la muerte del perro que le dio su esposa recientemente fallecida', '2:00', 25, 5, 300),
-(32, 'Predestinación', 'Un agente temporal se embarca en una misión para viajar en el tiempo y prevenir que un elusivo criminal ataque a miles de personas.', '2:00', 23, 5, 400),
-(33, 'Ese es mi hijo', 'Durante su adolescencia, Donny tiene un hijo llamado Todd al que cría como padre soltero hasta los 18 años.', '2:00', 24, 1, 100),
-(34, 'American History X', 'Tras ser liberado de la cárcel, un antiguo neonazi trata de evitar que su hermano menor siga sus pasos en la senda del odio.', '2:00', 27, 5, 400),
-(35, 'El club de la pelea', 'Un empleado de oficina insomne, harto de su vida, se cruza con un vendedor peculiar. Ambos crean un club de lucha clandestino ', '2:00', 27, 5, 300),
+(35, 'El club de los abrazos', 'Parodia del club de la pelea', '5m', 24, 3, 40),
 (36, 'Annabelle', 'Una preciosa muñeca antigua llamada Annabelle. Una noche, una secta satánica les ataca brutalmente y provocan que un ente maligno se apodere de Annabelle.', '1:40', 26, 2, 300);
 
 -- --------------------------------------------------------
@@ -82,6 +92,7 @@ INSERT INTO `peliculas` (`id`, `titulo`, `sinopsis`, `duracion`, `id_genero`, `p
 
 CREATE TABLE `usuarios` (
   `id` int(11) NOT NULL,
+  `userName` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL,
   `password` varchar(255) NOT NULL,
   `superUser` tinyint(1) NOT NULL
@@ -91,14 +102,23 @@ CREATE TABLE `usuarios` (
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `email`, `password`, `superUser`) VALUES
-(1, 'user1@mail.com', '$2y$10$.MhrrRPigd7YGHPCaT/exuRUkw3wJMfTTvl3r8wBfknTvGxRsDdkm', 1),
-(2, 'user2@mail.com', '$2y$10$Cv4xXgWdHtaBlebtcpGKJ.IS1hwCExFzQ75Vtax42yOT4.eRAMtyS', 0),
-(3, 'user3@mail.com', '$2y$10$ojOK66VUjk5lA4oxAKJi1e0JIGvrydONCKiV7K/X/irvAOZdgDtLO', 0);
+INSERT INTO `usuarios` (`id`, `userName`, `email`, `password`, `superUser`) VALUES
+(1, 'User1', 'user1@mail.com', '$2y$10$.MhrrRPigd7YGHPCaT/exuRUkw3wJMfTTvl3r8wBfknTvGxRsDdkm', 1),
+(2, 'User2', 'user2@mail.com', '$2y$10$Cv4xXgWdHtaBlebtcpGKJ.IS1hwCExFzQ75Vtax42yOT4.eRAMtyS', 0),
+(3, 'User3', 'user3@mail.com', '$2y$10$ojOK66VUjk5lA4oxAKJi1e0JIGvrydONCKiV7K/X/irvAOZdgDtLO', 0),
+(4, 'Angi', 'angi@mail.com', '$2y$10$RlVOLr7UyhWQiRY/QiutveT2kk5Tz9U5pYaDSM.emVM4nWroQx.Hm', 1),
+(5, 'Nico', 'nico@mail.com', '$2y$10$xz6oOS5yQbZqhjmdS8kFruEQR0hR8MHLaZOjTWGwesPkbPVL4wza2', 1),
+(7, 'User5', 'user5@mail.com', '$2y$10$sziISyAncVmjDjbSNo8/dut7Nhi7ySikZ8G1Sp5I4E6X8kuvt7lpa', 0);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `genero`
@@ -124,22 +144,28 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `comentarios`
+--
+ALTER TABLE `comentarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `genero`
 --
 ALTER TABLE `genero`
-  MODIFY `id_genero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_genero` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `peliculas`
 --
 ALTER TABLE `peliculas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Restricciones para tablas volcadas
