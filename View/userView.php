@@ -4,34 +4,31 @@ require_once "./libs/smarty/Smarty.class.php";
 
 class userView{
 
-    
+    private $smarty;
 
     //private $title;
     
     function __construct(){
-       //$this->title = "Lista de Tareas";
+       $this->smarty = new Smarty();
     }
 
 
     function ShowLogIn($mensaje){
-        $smarty = new Smarty();
-        $smarty->assign('mensaje_s', $mensaje);
-        $smarty->display('templates/login.tpl');
+        $this->smarty->assign('mensaje_s', $mensaje);
+        $this->smarty->display('templates/login.tpl');
     }
 
     function ShowRegistrarse(){
-        $smarty = new Smarty();
-        $smarty->display('templates/registrarse.tpl');
+        $this->smarty->display('templates/registrarse.tpl');
     }
 
     function AdminUsuarios($Usuarios){
-        $smarty = new Smarty();
         if (isset($_SESSION['email'])){
-            $smarty->assign('UserEmail_s', $_SESSION['email']);
-            $smarty->assign('UserName_s', $_SESSION['userName']);
-            $smarty->assign('superUser_s', $_SESSION['superuser']);
-            $smarty->assign('usuarios_s', $Usuarios);
-            $smarty->display('templates/adminUsuarios.tpl');
+            $this->smarty->assign('UserEmail_s', $_SESSION['email']);
+            $this->smarty->assign('UserName_s', $_SESSION['userName']);
+            $this->smarty->assign('superUser_s', $_SESSION['superuser']);
+            $this->smarty->assign('usuarios_s', $Usuarios);
+            $this->smarty->display('templates/adminUsuarios.tpl');
         }else{
             header("Location:".BASE_URL."/login");
         }

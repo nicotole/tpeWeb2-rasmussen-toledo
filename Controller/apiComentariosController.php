@@ -35,22 +35,31 @@ class apiComentariosController extends apiController {
     }
 
     public function BorrarComentario($params = null){
-        $id = $params[':ID'];
-        $comentario = $this->model->GetComentario($id);
-        if (isset($comentario)){
-            $this->model->BorrarComentario($id);
+        session_start();
+        if ( isset($_SESSION['email']) && ( $_SESSION['superuser'] == 1 ) ){
+            $id = $params[':ID'];
+            $comentario = $this->model->GetComentario($id);
+            if (isset($comentario)){
+                $this->model->BorrarComentario($id);
+            }else{
+                $this->view->response("El comentario de id=$id no existe");
+            }
         }else{
-            $this->view->response("El comentario de id=$id no existe");
+            $this->view->response("No se poseen los permisos necesarios para el request");
         }
     }
 
     public function InsertarComentario($params = null){
-        $body = $this->getData();//get data me da un json, por eso depues lo puedo manejar como objeto
-        $idComentario = $this->model->InsertarComentario($body->id_pelicula,$body->id_usuario,$body->puntaje, $body->comentario);
-        if(!empty($idComentario)){
-            $this->view->response($this->model->GetComentario($idComentario), 201);
+        session_start();
+        if ( isset($_SESSION['email']){
+            $body = $this->getData();//get data me da un json, por eso depues lo puedo manejar como objeto
+            $idComentario = $this->model->InsertarComentario($body->id_pelicula,$body->id_usuario,$body->puntaje, $body->comentario);
+            if(!empty($idComentario)){
+                $this->view->response($this->model->GetComentario($idComentario), 201);
+            }else{
+                $this->view->response("El comentario no pudo ser insertado", 404);           
+            }
         }else{
-            $this->view->response("El comentario no pudo ser insertado", 404);           
+            $this->view->response("No esta logueado, imposible insertar comentario");
         }
-    }
 }
