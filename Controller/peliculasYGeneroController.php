@@ -51,7 +51,8 @@ class peliculasYGeneroController{
             $generos = $this->modelGenero->GetGeneros();
             $this->view->ShowAdministrar($peliculas, $generos);
         }else{
-            header("Location:".BASE_URL."/login");
+            $this->view->ReLocalizar("login");
+            //header("Location:".BASE_URL."/login");
         }
     }
 
@@ -62,7 +63,8 @@ class peliculasYGeneroController{
             $generos = $this->modelGenero->GetGeneros();
             $this->view->AdminPeliculas($peliculas, $generos);
         }else{
-            header("Location:".BASE_URL."/login");
+            $this->view->ReLocalizar("login");
+            //header("Location:".BASE_URL."/login");
         }
     }
 
@@ -72,7 +74,8 @@ class peliculasYGeneroController{
             $generos = $this->modelGenero->GetGeneros();
             $this->view->AdminGeneros($generos);
         }else{
-            header("Location:".BASE_URL."/login");
+            $this->view->ReLocalizar("login");
+            //header("Location:".BASE_URL."/login");
         }
     }
 
@@ -81,9 +84,11 @@ class peliculasYGeneroController{
         if ( isset($_SESSION['email']) && ( $_SESSION['superuser'] == 1 ) ){// para que no pueda borrar solo pasando parametros por la barra
             $pelicula_id = $params[':ID'];//Este id pasa magico desde el router como declaramos la ruta
             $this->model->BorrarPelicula($pelicula_id);//pasamos el id para que lo borre el model
-            header("Location:".BASE_URL."/adminPeliculas");//le hacemos recargar la pagina para que se vea el cambio    
+            $this->view->ReLocalizar("adminPeliculas");
+            //header("Location:".BASE_URL."/adminPeliculas");//le hacemos recargar la pagina para que se vea el cambio    
         }else{
-            header("Location:".BASE_URL."/login");
+            $this->view->ReLocalizar("login");
+            //header("Location:".BASE_URL."/login");
         }
         
     }
@@ -92,9 +97,11 @@ class peliculasYGeneroController{
         session_start();
         if ( isset($_SESSION['email']) && ( $_SESSION['superuser'] == 1 ) ){
             $this->model->insertarPelicula();
-            header("Location:".BASE_URL."/adminPeliculas");
+            $this->view->ReLocalizar("adminPeliculas");
+            // header("Location:".BASE_URL."/adminPeliculas");
         }else{
-            header("Location:".BASE_URL."/login");
+            $this->view->ReLocalizar("login");
+            //header("Location:".BASE_URL."/login");
         }
     }
 
@@ -107,19 +114,22 @@ class peliculasYGeneroController{
             $generos = $this->modelGenero->GetGeneros();
             $this->view->ShowEditPelicula($peliculas, $id_pelicula,$generos);
         }else{
-            header("Location:".BASE_URL."/login");
+            $this->view->ReLocalizar("login");
+            //header("Location:".BASE_URL."/login");
         }
     }
     
     function GuardarPelicula($params = null){
         // echo("pase por el controller uhu");
         $this->model->EditarPelicula($params[':ID']);
-        header("Location:".BASE_URL."/adminPeliculas");
+        $this->view->ReLocalizar("adminPeliculas");
+        // header("Location:".BASE_URL."/adminPeliculas");
     }
 //-----------
     function BorrarGenero($params = null){
         $this->modelGenero->BorrarGenero($params[':ID']);
-        header("Location:".BASE_URL."/adminGeneros");
+        $this->view->ReLocalizar("adminGeneros");
+        // header("Location:".BASE_URL."/adminGeneros");
     }
 
     function EditarGenero($params = null){
@@ -129,18 +139,21 @@ class peliculasYGeneroController{
             $generos = $this->modelGenero->GetGeneros();
             $this->view->ShowEditGenero($peliculas, $generos, $params[':ID']);
         }else{
-            header("Location:".BASE_URL."/login");
+            $this->view->ReLocalizar("login");
+            //header("Location:".BASE_URL."/login");
         }
     }
 
     function GuardarGenero($params = null){
         $this->modelGenero->GuardarGenero($params[':ID']);
-        header("Location:".BASE_URL."/adminGeneros");
+        $this->view->ReLocalizar("adminGeneros");
+        //header("Location:".BASE_URL."/adminGeneros");
     }
 
     function SubirGenero(){
         $this->modelGenero->SubirGenero();
-        header("Location:".BASE_URL."/adminGeneros");
+        $this->view->ReLocalizar("adminGeneros");
+        //header("Location:".BASE_URL."/adminGeneros");
     }
 
 

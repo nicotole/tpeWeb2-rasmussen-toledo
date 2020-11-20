@@ -87,7 +87,8 @@ class peliculasYGeneroView{
             //$this->smarty->assign('generos_s',$generos);
             $this->smarty->display('templates/admin.tpl');
         }else{
-            header("Location:".BASE_URL."/login");//si no hay sesion iniciada manda a login
+            $this->ReLocalizar("login");
+            //header("Location:".BASE_URL."/login");//si no hay sesion iniciada manda a login
         }
     }
   
@@ -135,7 +136,8 @@ class peliculasYGeneroView{
             $this->smarty->assign('generos_s',$generos);
             $this->smarty->display('templates/adminGeneros.tpl');
         }else{
-            header("Location:".BASE_URL."/login");//si no hay sesion iniciada manda a login
+            $this->ReLocalizar("login");
+            //header("Location:".BASE_URL."/login");//si no hay sesion iniciada manda a login
         }
     }
 
@@ -145,5 +147,9 @@ class peliculasYGeneroView{
         $this->smarty->assign('superUser_s', $_SESSION['superuser']);
     }
 
+
+    function ReLocalizar($direcion){
+        header("Location:".BASE_URL."/$direcion");
+    }
     
 }

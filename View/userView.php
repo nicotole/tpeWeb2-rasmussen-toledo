@@ -30,9 +30,13 @@ class userView{
             $this->smarty->assign('usuarios_s', $Usuarios);
             $this->smarty->display('templates/adminUsuarios.tpl');
         }else{
-            header("Location:".BASE_URL."/login");
+            $this->ReLocalizar("login");
+            //header("Location:".BASE_URL."/login");
         }
     }
 
-  
+    function ReLocalizar($direcion){
+        header("Location:".BASE_URL."/$direcion");
+    }
+
 }
