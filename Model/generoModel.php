@@ -20,14 +20,14 @@ class generoModel{
         $sentencia->execute(array($id));
     }
 
-    function GuardarGenero($id){
+    function GuardarGenero($nombre, $id){
         $sentencia = $this->db->prepare("UPDATE genero SET nombre=? WHERE id_genero=?");
-        $sentencia->execute(array($_POST['nombre'], $id));
+        $sentencia->execute(array($nombre, $id));
     }
 
-    function SubirGenero(){
+    function SubirGenero($nombre){
         $sentencia = $this->db->prepare("INSERT INTO genero(nombre) VALUES(?)");//creamos el genero
-        $sentencia->execute(array($_POST['nombre']));//creamos el genero
+        $sentencia->execute(array($nombre));//creamos el genero
     }
 
 }

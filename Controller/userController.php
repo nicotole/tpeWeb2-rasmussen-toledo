@@ -55,7 +55,7 @@ class userController{
     }
     
     function RegistrarUsuario(){
-        $this->model->InsertarUsuario();
+        $this->model->InsertarUsuario($_POST['userName'], $_POST['email'], $_POST['contraseña']);
         $userFromDB = $this->model->GetUser($_POST['email']);
         session_start();
         $_SESSION['userName'] = $_POST['userName'];

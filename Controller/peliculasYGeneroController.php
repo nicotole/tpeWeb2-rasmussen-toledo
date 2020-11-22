@@ -94,9 +94,10 @@ class peliculasYGeneroController{
     }
 
     function SubirPelicula(){//no usamos params porque params es para get
+        //revisar si pos esta seteado
         session_start();
         if ( isset($_SESSION['email']) && ( $_SESSION['superuser'] == 1 ) ){
-            $this->model->insertarPelicula();
+            $this->model->insertarPelicula($_POST['titulo'], $_POST['sinopsis'], $_POST['duracion'], $_POST['puntuacion'], $_POST['precio']);
             $this->view->ReLocalizar("adminPeliculas");
             // header("Location:".BASE_URL."/adminPeliculas");
         }else{
@@ -120,8 +121,9 @@ class peliculasYGeneroController{
     }
     
     function GuardarPelicula($params = null){
+            //revisar si pos esta seteado
         // echo("pase por el controller uhu");
-        $this->model->EditarPelicula($params[':ID']);
+        $this->model->EditarPelicula( $_POST['titulo'] , $_POST['sinopsis'] , $_POST['duracion'] , $_POST['puntuacion'] , $_POST['precio'], $params[':ID']);
         $this->view->ReLocalizar("adminPeliculas");
         // header("Location:".BASE_URL."/adminPeliculas");
     }
@@ -145,13 +147,15 @@ class peliculasYGeneroController{
     }
 
     function GuardarGenero($params = null){
-        $this->modelGenero->GuardarGenero($params[':ID']);
+        //revisar si pos esta seteado
+        $this->modelGenero->GuardarGenero($_POST['nombre'], $params[':ID']);
         $this->view->ReLocalizar("adminGeneros");
         //header("Location:".BASE_URL."/adminGeneros");
     }
 
     function SubirGenero(){
-        $this->modelGenero->SubirGenero();
+        //revisar si pos esta seteado
+        $this->modelGenero->SubirGenero($_POST['nombre']);
         $this->view->ReLocalizar("adminGeneros");
         //header("Location:".BASE_URL."/adminGeneros");
     }

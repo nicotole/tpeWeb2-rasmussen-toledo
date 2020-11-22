@@ -21,13 +21,12 @@ class userModel{
         return $sentencia->fetch(PDO::FETCH_OBJ);
     }
 
-    function InsertarUsuario(){
+    function InsertarUsuario($userName, $email ,$password){
 
-        $password = $_POST['contraseña'];
         $hash = password_hash($password, PASSWORD_DEFAULT);
 
         $sentencia = $this->db->prepare("INSERT INTO usuarios(userName, email, password, superUser) VALUES(?,?,?,?)");
-        $sentencia->execute(array($_POST['userName'], $_POST['email'], $hash, 0));
+        $sentencia->execute(array($userName, $email , $hash, 0));
     }
 
     function GetUsuarios(){
