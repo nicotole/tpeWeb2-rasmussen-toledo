@@ -55,17 +55,19 @@ class userController{
     }
     
     function RegistrarUsuario(){
-        $this->model->InsertarUsuario($_POST['userName'], $_POST['email'], $_POST['contraseña']);
-        $userFromDB = $this->model->GetUser($_POST['email']);
-        session_start();
-        $_SESSION['userName'] = $_POST['userName'];
-        $_SESSION['email'] = $_POST['email'];
-        //$_SESSION['contraseña'] = $_POST['contraseña'];
-        $_SESSION['superuser'] = $userFromDB->superUser;
-        //echo  $userFromDB->superUser;
-        //$_SESSION['superuser'] = 0;
-        $this->view->ReLocalizar("home");
-        //header("Location:".BASE_URL."/home");
+        if(isset($_POST) && !is_null($_POST)){
+            $this->model->InsertarUsuario($_POST['userName'], $_POST['email'], $_POST['contraseña']);
+            $userFromDB = $this->model->GetUser($_POST['email']);
+            session_start();
+            $_SESSION['userName'] = $_POST['userName'];
+            $_SESSION['email'] = $_POST['email'];
+            //$_SESSION['contraseña'] = $_POST['contraseña'];
+            $_SESSION['superuser'] = $userFromDB->superUser;
+            //echo  $userFromDB->superUser;
+            //$_SESSION['superuser'] = 0;
+            $this->view->ReLocalizar("home");
+            //header("Location:".BASE_URL."/home");
+        }
     }
 
     function AdminUsuarios(){
