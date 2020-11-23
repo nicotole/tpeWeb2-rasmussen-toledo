@@ -11,6 +11,11 @@
 {* <div class="pelicula"> *}
 
 {include file="vue/comentarios.vue"}
+{if isset($UserName_s)}
+    {include file="vue/comentarForm.vue"} 
+{/if}
+
+
 {* </div> *}
 <script src="js/comentarios.js"></script>
 {include file="footer.tpl"}

@@ -343,6 +343,9 @@ h3{
     margin: 12px 0px 12px 0px;
 }
 
+textarea {
+    resize: none;
+  }
 /*fin de retoque*/
 
 
