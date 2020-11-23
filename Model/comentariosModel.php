@@ -9,7 +9,8 @@ class comentariosModel{
     }
 
     function GetComentarios(){
-        $sentencia = $this->db->prepare("SELECT * FROM comentarios");
+        //$sentencia = $this->db->prepare("SELECT * FROM comentarios");
+        $sentencia = $this->db->prepare("SELECT comentarios.id, comentarios.puntaje, comentarios.comentario, usuarios.userName FROM comentarios INNER JOIN usuarios ON comentarios.id_usuario = usuarios.id");
         $sentencia->execute();
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
     }

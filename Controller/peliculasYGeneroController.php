@@ -113,7 +113,7 @@ class peliculasYGeneroController{
             $peliculas = $this->model->GetPeliculasYGenero();//pido toda la tabla de peliculas junto con la tambla de genero, viene todo en un arreglo
             //print_r($peliculas[1]);
             $generos = $this->modelGenero->GetGeneros();
-            $this->view->ShowEditPelicula($peliculas, $id_pelicula,$generos);
+            $this->view->ShowEditPelicula($peliculas, $id_pelicula, $generos);
         }else{
             $this->view->ReLocalizar("login");
             //header("Location:".BASE_URL."/login");

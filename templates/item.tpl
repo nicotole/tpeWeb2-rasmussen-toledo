@@ -8,4 +8,8 @@
         <li>Precio:{$item_s->precio} rupias</li>
     </ul>
 </div>
+<div class="pelicula">
+    {include file="vue/comentarios.vue"}
+</div>
+<script src="js/comentarios.js"></script>
 {include file="footer.tpl"}
