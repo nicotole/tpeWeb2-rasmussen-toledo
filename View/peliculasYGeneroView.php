@@ -143,6 +143,7 @@ class peliculasYGeneroView{
 
     private function setUserBasicsToSmarty(){
         $this->smarty->assign('UserEmail_s', $_SESSION['email']);
+        $this->smarty->assign('UserId_s', $_SESSION['id']);
         $this->smarty->assign('UserName_s', $_SESSION['userName']);
         $this->smarty->assign('superUser_s', $_SESSION['superuser']);
     }

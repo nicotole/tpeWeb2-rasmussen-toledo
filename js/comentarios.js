@@ -11,12 +11,8 @@ let app = new Vue({
 
 document.addEventListener('DOMContentLoaded', () => {
     getComentarios();
-    // document.querySelector('#form-task').addEventListener('submit', e => {
-    //     // evita el envio del form default
-    //     e.preventDefault();
 
-    //     addTask();
-    // });
+    document.querySelector('#form-comentario').addEventListener('submit', addComentario);
 
 });
 
@@ -27,15 +23,19 @@ function getComentarios() {
         .catch(error => console.log(error));
 }
 
-// function addTask() {
-
-//     const task = {
-//         title: document.querySelector('input[name="input_title"]').value,
-//         description: document.querySelector('input[name="input_description"]').value,
-//         completed: document.querySelector('input[name="input_completed"]').checked,
-//         priority: document.querySelector('input[name="input_priority"]').value
-//     }
-
+function addComentario(e) {
+    e.preventDefault();
+     const comentario = {
+        //id_libro: document.querySelector("input[name=libroId]").value,
+        id_pelicula: document.querySelector('input[name=id_pelicula]').value,
+        id_usuario: document.querySelector('input[name=id_usuario]').value
+         //completed: document.querySelector('input[name="input_completed"]').checked,
+         //priority: document.querySelector('input[name="input_priority"]').value
+        }
+        console.log(comentario);
+        console.log(id_pelicula);
+        console.log(id_usuario);
+        
 //     fetch('api/tareas', {
 //         method: 'POST',
 //         headers: { "Content-Type": "application/json" },
@@ -45,4 +45,4 @@ function getComentarios() {
 //         .then(task => app.tasks.push(task))
 //         .catch(error => console.log(error));
 
-// }
+}
