@@ -29,6 +29,7 @@ class userController{
                     session_start();
                     $_SESSION['userName'] = $userFromDB->userName;
                     $_SESSION['email'] = $userFromDB->email;
+                    $_SESSION['id'] = $userFromDB->id;
                     //$_SESSION['contraseña'] =$userFromDB->password;
                     $_SESSION['superuser'] = $userFromDB->superUser;
                     //echo $_SESSION['superuser'];
@@ -62,6 +63,7 @@ class userController{
             $_SESSION['userName'] = $_POST['userName'];
             $_SESSION['email'] = $_POST['email'];
             //$_SESSION['contraseña'] = $_POST['contraseña'];
+            $_SESSION['id'] = $userFromDB->id;
             $_SESSION['superuser'] = $userFromDB->superUser;
             //echo  $userFromDB->superUser;
             //$_SESSION['superuser'] = 0;

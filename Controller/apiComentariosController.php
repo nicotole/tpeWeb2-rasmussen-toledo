@@ -26,6 +26,7 @@ class apiComentariosController extends apiController {
 
     public function GetComentariosPorPelicula($params = null){
         $id = $params[':ID'];
+        //echo $id;
         $comentarios = $this->model->GetComentariosPorPelicula($id);
         if(!empty($comentarios)){
             $this->view->response($comentarios, 200);

@@ -1,9 +1,10 @@
-console.log("El js está funcionando");
+// console.log("El js está funcionando");
 "use strict"
 
 let app = new Vue({
     el: '#vue-comentarios',
     data: {
+        superUser: -1,
         comentarios: []  
     },
 
@@ -12,17 +13,21 @@ let app = new Vue({
 document.addEventListener('DOMContentLoaded', () => {
     getComentarios();
 
-    document.querySelector('#form-comentario').addEventListener('submit', addComentario);
+    //document.querySelector('#form-comentario').addEventListener('submit', addComentario);
 
 });
 
 function getComentarios() {
-    fetch('api/comentarios')
+    let id_pelicula = document.querySelector('input[name=id_pelicula]').value;
+    //console.log(id_pelicula);
+    //console.log('api/comentarios/peliculas/'+ id_pelicula);
+                //comentarios/peliculas/:ID
+    fetch('api/comentarios/peliculas/'+ id_pelicula)
         .then(response => response.json())
         .then(comentarios => app.comentarios = comentarios)
         .catch(error => console.log(error));
 }
-
+/*
 function addComentario(e) {
     e.preventDefault();
     //holis
@@ -46,4 +51,4 @@ function addComentario(e) {
 //         .then(task => app.tasks.push(task))
 //         .catch(error => console.log(error));
 
-}
+}*/
