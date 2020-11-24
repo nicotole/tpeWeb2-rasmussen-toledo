@@ -25,6 +25,7 @@ function getComentarios() {
 
 function addComentario(e) {
     e.preventDefault();
+    //holis
      const comentario = {
         //id_libro: document.querySelector("input[name=libroId]").value,
         id_pelicula: document.querySelector('input[name=id_pelicula]').value,
