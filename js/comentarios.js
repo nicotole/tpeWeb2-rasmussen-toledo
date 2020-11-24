@@ -5,7 +5,8 @@ let app = new Vue({
     el: '#vue-comentarios',
     data: {
         comentarios: []  
-    }
+    },
+
 });
 
 document.addEventListener('DOMContentLoaded', () => {
