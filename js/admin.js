@@ -1,3 +1,4 @@
-app.superUser = 0;
+app.superUser = 1;
 
-console.log("holiiiis soy admin");
+
+

@@ -22,8 +22,8 @@
 <script src="js/visitante.js"></script>
 {if (isset($superUser_s)) && (($superUser_s == 0) || ($superUser_s == 1))}
     <script src="js/usuario.js"></script>
-    {* {if $superUser_s == 1}
+    {if $superUser_s == 1}
         <script src="js/admin.js"></script>
-    {/if} *}
+    {/if}
 {/if}
 {include file="footer.tpl"}
