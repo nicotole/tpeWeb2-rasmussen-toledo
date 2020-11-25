@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //document.querySelector('#form-comentario').addEventListener('submit', addComentario);
 
 });
-
+{/* <li>Nombre:{$item_s->titulo}</li> */}
 function getComentarios() {
     let id_pelicula = document.querySelector('input[name=id_pelicula]').value;
     //console.log(id_pelicula);
