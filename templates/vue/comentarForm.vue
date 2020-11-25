@@ -6,7 +6,7 @@
                 <input type="hidden" name="id_pelicula" value="{$item_s->id}">
                 <input type="hidden" name="id_usuario" value="{$UserId_s}">
                 <textarea name="comentario" rows="10" cols="50" placeholder=" Tu comentario..."></textarea>
-                <input type="number" name="puntaje" placeholder=" puntaje" class="input">
+                <input type="number"  min="1" max="5" name="puntaje" placeholder=" puntaje" class="input">
             </div>
             <div class="contenedorBotonesRegistro">
                 <button type="submit" class="botonVisible">Comentar</button>
