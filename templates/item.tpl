@@ -2,11 +2,11 @@
 <div class="pelicula" id="{$item_s->id}">
     <input type="hidden" name="id_pelicula" value="{$item_s->id}">
     <ul>
-        <li>Nombre:{$item_s->titulo}</li>
-        <li>Sinopsis:{$item_s->sinopsis}</li>
-        <li>Duracion:{$item_s->duracion}</li>
-        <li>Puntuacion:{$item_s->puntuacion}</li>
-        <li>Precio:{$item_s->precio} rupias</li>
+        <li>Nombre: {$item_s->titulo}</li>
+        <li>Sinopsis: {$item_s->sinopsis}</li>
+        <li>Duracion: {$item_s->duracion}</li>
+        <li>Puntuacion: {$item_s->puntuacion}</li>
+        <li>Precio: {$item_s->precio} rupias</li>
     </ul>
 </div>
 {* <div class="pelicula"> *}

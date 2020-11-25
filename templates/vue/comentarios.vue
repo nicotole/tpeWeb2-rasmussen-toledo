@@ -15,6 +15,7 @@
             <li>Comentario: {{ comentario.comentario}}</li>
             <li>Puntaje: {{comentario.puntaje}}</li>
         </ul>
+         <button v-if="superUser == 1" v-on:click="deleteComentario(comentario.id)" class="botonVisible"> Borrar </button>
     </div>
    <!--     </li>-->
    <!-- </ul>-->

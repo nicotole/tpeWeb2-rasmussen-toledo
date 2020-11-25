@@ -7,6 +7,11 @@ let app = new Vue({
         superUser: -1,
         comentarios: []  
     },
+    methods: {
+        deleteComentario: function(idComentario){
+            borrarComentario(idComentario);
+        }
+    }
 
 });
 
@@ -23,9 +28,13 @@ function getComentarios() {
     //console.log('api/comentarios/peliculas/'+ id_pelicula);
                 //comentarios/peliculas/:ID
     fetch('api/comentarios/peliculas/'+ id_pelicula)
+    //if(isset(response)){
+        //.then(response => {if(response.status != 404){ ( (response => response.json()).then(comentarios => app.comentarios = comentarios))}})
         .then(response => response.json())
-        .then(comentarios => app.comentarios = comentarios)
-        .catch(error => console.log(error));
+        .then(response => {if(response != null){ (comentarios => app.comentarios = comentarios)}})
+    //.then(comentarios => app.comentarios = comentarios)
+    .catch(error => console.log(error));
+    //}
 }
 /*
 function addComentario(e) {

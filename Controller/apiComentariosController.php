@@ -1,11 +1,17 @@
 <?php
 require_once './Model/comentariosModel.php';
+require_once "./Model/peliculasModel.php";
 require_once 'apiController.php';
 
+
 class apiComentariosController extends apiController {
+
+    private $peliculasModel;
+    
     function __construct(){
         parent::__construct();
         $this->model = new comentariosModel();
+        $this->peliculasModel = new peliculasModel();
         $this->view = new apiView();
     }
 
@@ -27,11 +33,16 @@ class apiComentariosController extends apiController {
     public function GetComentariosPorPelicula($params = null){
         $id = $params[':ID'];
         //echo $id;
-        $comentarios = $this->model->GetComentariosPorPelicula($id);
-        if(!empty($comentarios)){
+        $pelicula = $this->peliculasModel->GetPeliculaPorID($id);
+        if(isset($pelicula)){
+            $comentarios = $this->model->GetComentariosPorPelicula($id);
+            //if(!empty($comentarios)){
             $this->view->response($comentarios, 200);
+            //}else{
+            //    $this->view->response("Los comentarios de la pelicula id=$id no existen" , 404);
+            //}
         }else{
-            $this->view->response("Los comentarios de la pelicula id=$id no existen" , 404);
+            $this->view->response("La pelicula con el id=$id no existen" , 404);
         }
     }
 
@@ -40,13 +51,14 @@ class apiComentariosController extends apiController {
         if ( isset($_SESSION['email']) && ( $_SESSION['superuser'] == 1 ) ){
             $id = $params[':ID'];
             $comentario = $this->model->GetComentario($id);
-            if (isset($comentario)){
+            //$this->view->response($comentario, 404);
+            if (($comentario != false)){
                 $this->model->BorrarComentario($id);
             }else{
-                $this->view->response("El comentario de id=$id no existe");
+                $this->view->response("El comentario de id=$id no existe", 404);
             }
         }else{
-            $this->view->response("No se poseen los permisos necesarios para el request");
+            $this->view->response("No se poseen los permisos necesarios para el request", 403);
         }
     }
 
@@ -58,10 +70,10 @@ class apiComentariosController extends apiController {
             if(!empty($idComentario)){
                 $this->view->response($this->model->GetComentario($idComentario), 201);
             }else{
-                $this->view->response("El comentario no pudo ser insertado", 404);           
+                $this->view->response("El comentario no pudo ser insertado", 409);           
             }
         }else{
-            $this->view->response("No esta logueado, imposible insertar comentario");
+            $this->view->response("No se poseen los permisos necesarios para el request", 403);
         }
     }
 }
