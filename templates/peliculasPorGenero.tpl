@@ -3,6 +3,7 @@
 
 {foreach from=$peliculasPorGenero_s item=peliculaPorGenero}
     <div class="pelicula">
+    <img src="{$peliculaPorGenero->imagen}" alt="imgen de la pelicula" class="PeliculasDelUsuario">
         <ul>
             <li>Nombre: {$peliculaPorGenero->titulo}</li>
             <li>Sinopsis: {$peliculaPorGenero->sinopsis}</li>

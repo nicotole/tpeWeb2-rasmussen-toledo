@@ -241,7 +241,7 @@ h2{
 }
 
 .imagenPeliculaHome{
-    width: 98%;
+    width: 50px !important;
     padding: 1%;
 }
 
@@ -345,7 +345,13 @@ h3{
 
 textarea {
     resize: none;
-  }
+}
+
+.PeliculasDelUsuario{
+    width: 23%;
+}
+
+
 /*fin de retoque*/
 
 
@@ -416,7 +422,7 @@ textarea {
     }
 
     .imagenPeliculaHome{
-        width: 23%;
+        width: 30px;
     }
 
 

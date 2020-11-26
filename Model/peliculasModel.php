@@ -31,7 +31,7 @@ class peliculasModel{
 
     function GetPeliculasConGenero(){//retorna tabla con nombre de la pelicula y su genero
         //$sentencia = $this->db->prepare("SELECT * FROM peliculas INNER JOIN genero ON peliculas.titulo = genero.nombre");
-        $sentencia = $this->db->prepare("SELECT peliculas.titulo, genero.nombre FROM peliculas INNER JOIN genero ON peliculas.id_genero = genero.id_genero");
+        $sentencia = $this->db->prepare("SELECT peliculas.titulo, peliculas.imagen, genero.nombre FROM peliculas INNER JOIN genero ON peliculas.id_genero = genero.id_genero");
         $sentencia->execute();
         //print_r( $sentencia->fetchAll(PDO::FETCH_OBJ));// vemos que este cargado y con que 
         return $sentencia->fetchAll(PDO::FETCH_OBJ);
@@ -94,6 +94,17 @@ class peliculasModel{
 . strtolower(pathinfo($_FILES['input_name']['name'], PATHINFO_EXTENSION));
     */
     
+    function EditarPeliculaConImg($titulo, $sinopsis, $duracion, $puntuacion, $precio, $img, $id){
+        //echo $img;
+        $this->BorrarImgDeArchivos($titulo);
+        $genero = $this->db->prepare("SELECT * FROM genero WHERE nombre=?");
+        $genero->execute(array($_POST['genero']));
+        $arrGenero = $genero->fetchAll(PDO::FETCH_OBJ);
+        $imagen = null;
+        $imagen = $this->uploadImage($img);
+        $sentencia = $this->db->prepare("UPDATE peliculas SET titulo=?, sinopsis=?, duracion=?, id_genero=?, puntuacion=?, precio=?, imagen=? WHERE id=?");
+        $sentencia->execute(array( $titulo, $sinopsis, $duracion, $arrGenero[0]->id_genero, $puntuacion, $precio, $imagen, $id ));
+    }
 
 
     function EditarPelicula($titulo, $sinopsis, $duracion, $puntuacion, $precio, $id){
@@ -118,6 +129,25 @@ class peliculasModel{
         //     $sentencia->execute(array( $_POST['titulo'] , $_POST['sinopsis'] , $_POST['duracion'] , $arrGenero[0]->id_genero, $_POST['puntuacion'] , $_POST['precio'], $id ));
         // }
     }
+
+    private function BorrarImgDeArchivos($titulo_pelicula){
+        $Pelicula = $this->GetPelicula($titulo_pelicula);
+        //print_r($Pelicula);
+        //print_r($Pelicula->imagen);
+        $rutaDeImg = $Pelicula->imagen;
+        unlink($rutaDeImg);
+    }
+
+    // function BorrarImagenByNombre($id_imagen){
+    //     $imagen = $this->GetImagen($id_imagen);
+    //     if(isset($imagen)){
+    //         $sentencia = $this->db->prepare("delete from imagenlibro where id_imagen=?");
+    //         $sentencia->execute(array($id_imagen));
+    //         $this->carpeta .= $id_imagen;
+    //         unlink($this->carpeta);
+    //     }
+    // }
+
 
     
 }

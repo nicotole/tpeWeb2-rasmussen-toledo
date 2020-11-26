@@ -2,8 +2,9 @@
 {foreach from=$peliculas_s item=pelicula}
     {if (isset($id_pelicula_s)) && ($id_pelicula_s == $pelicula->id) }
         <div class="pelicula">
-            <form autocomplete="off" class="formularioRegistro" method="POST" action="guardarPelicula/{$pelicula->id}">
+            <form autocomplete="off" class="formularioRegistro" method="POST" action="guardarPelicula/{$pelicula->id}" enctype="multipart/form-data">
                 <div class="inputs">
+                <img src="{$pelicula->imagen}" alt="imgen de la pelicula" class="PeliculasDelUsuario">
                     <input type="text" name="titulo" value="{$pelicula->titulo}" class="input">
                     <select name="genero">
                     {foreach from=$generos_s item=genero}
@@ -14,12 +15,15 @@
                     <input type="text" name="duracion" value="{$pelicula->duracion}" class="input">
                     <input type="number" name="puntuacion" value="{$pelicula->puntuacion}" class="input">
                     <input type="number" name="precio" value="{$pelicula->precio}" class="input">
+                    <p>Para remplaza la imagen deberas seleccionar un nuevo archivo</p>
+                    <input type="file" name="imagen" accept="image/jpg, image/jpeg">
                 </div>
                 <button type="submit" class="botonVisible">Guardar</button>
             </form>
         </div>
     {else}
         <div class="pelicula">
+        <img src="{$pelicula->imagen}" alt="imgen de la pelicula" class="PeliculasDelUsuario">
             <ul>
                 <li>Titulo: {$pelicula->titulo}</li>
                 <li>Genero: {$pelicula->nombre}</li>

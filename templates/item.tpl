@@ -1,6 +1,7 @@
 {include file="header.tpl"}
 <div class="pelicula" id="{$item_s->id}">
     <input type="hidden" name="id_pelicula" value="{$item_s->id}">
+        <img src="{$item_s->imagen}" alt="imgen de la pelicula" class="PeliculasDelUsuario">
     <ul>
         <li>Nombre: {$item_s->titulo}</li>
         <li>Sinopsis: {$item_s->sinopsis}</li>

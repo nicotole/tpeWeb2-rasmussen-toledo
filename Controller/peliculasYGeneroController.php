@@ -90,6 +90,7 @@ class peliculasYGeneroController{
             $this->view->ReLocalizar("login");
             //header("Location:".BASE_URL."/login");
         }
+
         
     }
 
@@ -130,9 +131,17 @@ class peliculasYGeneroController{
             //revisar si pos esta seteado
         // echo("pase por el controller uhu");
         if(isset($_POST) && !is_null($_POST)){
-            $this->model->EditarPelicula( $_POST['titulo'] , $_POST['sinopsis'] , $_POST['duracion'] , $_POST['puntuacion'] , $_POST['precio'], $params[':ID']);
+            //print_r($_POST);
+            //print_r($_FILES);
+            //print_r($_POST['imagen']);
+            //echo  $_FILES['imagen']['tmp_name'];
+            if($_FILES['imagen']['type'] != null){
+                $this->model->EditarPeliculaConImg( $_POST['titulo'] , $_POST['sinopsis'] , $_POST['duracion'] , $_POST['puntuacion'] , $_POST['precio'], $_FILES['imagen']['type'], $params[':ID']);
+            }else{
+                echo "entre al else";
+                $this->model->EditarPelicula( $_POST['titulo'] , $_POST['sinopsis'] , $_POST['duracion'] , $_POST['puntuacion'] , $_POST['precio'], $params[':ID']);
+            }
             $this->view->ReLocalizar("adminPeliculas");
-            // header("Location:".BASE_URL."/adminPeliculas");
         }
     }
 //-----------
