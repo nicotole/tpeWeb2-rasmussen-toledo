@@ -63,27 +63,38 @@ class peliculasModel{
         //return $sentencia->fetchAll(PDO::FETCH_OBJ);//no hay nada que retornar, no se retorna porque se borra y listo
     }
 
-    function insertarPelicula($titulo, $sinopsis, $duracion, $puntuacion, $precio){
+    function insertarPelicula($titulo, $sinopsis, $duracion, $puntuacion, $precio, $img){
         $genero = $this->db->prepare("SELECT * FROM genero WHERE nombre=?");//todo de genero del nombre que quiero
         $genero->execute(array($_POST['genero']));//le asignamos ese nombre
         $arrGenero = $genero->fetchAll(PDO::FETCH_OBJ);//lo pedimos a la  base de datos y me retorna un arreglo de lo buscado, en este caso solo una pos
         
-        //if (isset($arrGenero[0])){//hacemos la movida del if porque no sabemos el genero
-            $sentencia = $this->db->prepare("INSERT INTO peliculas(titulo, id_genero, sinopsis, duracion, puntuacion, precio) VALUES(?,?,?,?,?,?)");
-            $sentencia->execute(array($titulo, $arrGenero[0]->id_genero, $sinopsis, $duracion, $puntuacion, $precio));
-        // }else{
-           
-        //     $sentencia = $this->db->prepare("INSERT INTO genero(nombre) VALUES(?)");//creamos el genero
-        //     $sentencia->execute(array($_POST['genero']));//creamos el genero
-
-        //     $genero = $this->db->prepare("SELECT * FROM genero WHERE nombre=?");//todo de genero del nombre que quiero
-        //     $genero->execute(array($_POST['genero']));//pedimos el genero
-        //     $arrGenero = $genero->fetchAll(PDO::FETCH_OBJ);//pedimos el genero
-
-        //     $sentencia = $this->db->prepare("INSERT INTO peliculas(titulo, id_genero, sinopsis, duracion, puntuacion, precio) VALUES(?,?,?,?,?,?)");
-        //     $sentencia->execute(array($_POST['titulo'], $arrGenero[0]->id_genero, $_POST['sinopsis'], $_POST['duracion'], $_POST['puntuacion'], $_POST['precio']));
-        // }
+        $pathImg = null;
+        //if ($imagen)
+        $pathImg = $this->uploadImage($img);
+        $sentencia = $this->db->prepare("INSERT INTO peliculas(titulo, id_genero, sinopsis, duracion, puntuacion, precio, imagen) VALUES(?,?,?,?,?,?,?)");
+        $sentencia->execute(array($titulo, $arrGenero[0]->id_genero, $sinopsis, $duracion, $puntuacion, $precio, $pathImg));
+        
     }
+
+    private function uploadImage($image){
+        //$target = './imagenes/imagenes-de-usuario/' . uniqid() . '.jpg';
+        $filePath = './imagenes/imagenes-de-usuario/' . uniqid("", true) .".". strtolower(pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION));
+        move_uploaded_file($image, $filePath);
+        return $filePath;
+    }
+
+    // function uniqueSaveName($realName, $tempName) {
+    //     $filePath = "images/" . uniqid("", true) .  . strtolower(pathinfo($realName, PATHINFO_EXTENSION));
+    //     move_uploaded_file($tempName, $filePath);
+    //     return $filePath;
+    // }
+
+    /*
+    $filePath = "img/" . uniqid("", true) . "." 
+. strtolower(pathinfo($_FILES['input_name']['name'], PATHINFO_EXTENSION));
+    */
+    
+
 
     function EditarPelicula($titulo, $sinopsis, $duracion, $puntuacion, $precio, $id){
         $genero = $this->db->prepare("SELECT * FROM genero WHERE nombre=?");

@@ -94,20 +94,23 @@ class peliculasYGeneroController{
     }
 
     function SubirPelicula(){//no usamos params porque params es para get
-        //revisar si pos esta seteado
-        // $_POST != null
         if(isset($_POST) && !is_null($_POST)){
             session_start();
-            if ( isset($_SESSION['email']) && ( $_SESSION['superuser'] == 1 ) ){
-                $this->model->insertarPelicula($_POST['titulo'], $_POST['sinopsis'], $_POST['duracion'], $_POST['puntuacion'], $_POST['precio']);
+            if ( isset($_SESSION['email']) && ( $_SESSION['superuser'] == 1 ) 
+            && ($_FILES['imagen']['type'] == "image/jpg" || $_FILES['imagen']['type'] == "image/jpeg" )){
+                $this->model->insertarPelicula($_POST['titulo'], $_POST['sinopsis'], $_POST['duracion'], $_POST['puntuacion'], $_POST['precio'], $_FILES['imagen']['tmp_name']);
                 $this->view->ReLocalizar("adminPeliculas");
-                // header("Location:".BASE_URL."/adminPeliculas");
             }else{
                 $this->view->ReLocalizar("login");
-                //header("Location:".BASE_URL."/login");
             }
         }
     }
+
+    // if($_FILES['input_name']['type'] == "image/jpg" || $_FILES['input_name']['type'] == "image/jpeg" || $_FILES['input_name']['type'] == "image/png" || …) 
+    //     $this->model->saveTask($titulo, $descripcion,  $_FILES['input_name']['tmp_name']);
+    // else{
+    //     $this->model->saveTask($titulo, $descripcion);
+    // }
 
     function EditarPelicula($params = null){
         session_start();

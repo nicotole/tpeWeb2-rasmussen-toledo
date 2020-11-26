@@ -16,7 +16,7 @@ class generoModel{
     }
 
     function BorrarGenero($id){
-        $sentencia = $this->db->prepare("DELETE FROM genero WHERE  id_genero=?");
+        $sentencia = $this->db->prepare("DELETE FROM genero WHERE id_genero=?");
         $sentencia->execute(array($id));
     }
 
