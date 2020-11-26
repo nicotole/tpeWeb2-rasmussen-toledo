@@ -64,7 +64,7 @@ class apiComentariosController extends apiController {
 
     public function InsertarComentario($params = null){
         session_start();
-        if ( isset($_SESSION['email'])){
+        //if ( isset($_SESSION['email'])){
             $body = $this->getData();//get data me da un json, por eso depues lo puedo manejar como objeto
             $idComentario = $this->model->InsertarComentario($body->id_pelicula,$body->id_usuario,$body->puntaje, $body->comentario);
             if(!empty($idComentario)){
@@ -72,8 +72,8 @@ class apiComentariosController extends apiController {
             }else{
                 $this->view->response("El comentario no pudo ser insertado", 409);           
             }
-        }else{
-            $this->view->response("No se poseen los permisos necesarios para el request", 403);
-        }
+        // }else{
+        //     $this->view->response("No se poseen los permisos necesarios para el request", 403);
+        // }
     }
 }

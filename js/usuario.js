@@ -13,25 +13,21 @@ document.addEventListener('DOMContentLoaded', () => {
 function addComentario(e) {
     e.preventDefault();
     //holis
-     let comentario = {
-        //id_libro: document.querySelector("input[name=libroId]").value,
-        id_pelicula: document.querySelector('input[name=id_pelicula]').value,
-        id_usuario: document.querySelector('input[name=id_usuario]').value,
-        puntaje: document.querySelector("input[name=puntaje]").value,
-        comentario: document.querySelector("textarea[name=comentario]").value
-        }
-        //console.log(id_usuario);
-     fetch('api/comentarios', {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(comentario)
-     })
-    .then(response => {getComentarios();
+    let comentario = {
+       //id_libro: document.querySelector("input[name=libroId]").value,
+       id_pelicula: document.querySelector('input[name=id_pelicula]').value,
+       id_usuario: document.querySelector('input[name=id_usuario]').value,
+       puntaje: document.querySelector("input[name=puntaje]").value,
+       comentario: document.querySelector("textarea[name=comentario]").value
+       }
+       //console.log(id_usuario);
+    fetch('api/comentarios', {
+       method: 'POST',
+       headers: { "Content-Type": "application/json" },
+       body: JSON.stringify(comentario)
     })
-    .then(response => response.json())
-    .then(comentario => app.comentarios.push(comentario))
+    .then( () => {getComentarios();})
     .catch(error => console.log(error));
-
 }
 
 

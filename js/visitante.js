@@ -16,23 +16,21 @@ let app = new Vue({
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log("holi1");
     getComentarios();
-
+    console.log("hola1");
     //document.querySelector('#form-comentario').addEventListener('submit', addComentario);
 
 });
 {/* <li>Nombre:{$item_s->titulo}</li> */}
 function getComentarios() {
     let id_pelicula = document.querySelector('input[name=id_pelicula]').value;
-    //console.log(id_pelicula);
-    //console.log('api/comentarios/peliculas/'+ id_pelicula);
-                //comentarios/peliculas/:ID
+    console.log(id_pelicula);
     fetch('api/comentarios/peliculas/'+ id_pelicula)
-    //if(isset(response)){
-        //.then(response => {if(response.status != 404){ ( (response => response.json()).then(comentarios => app.comentarios = comentarios))}})
-        .then(response => response.json())
-        .then(response => {if(response != null){ (comentarios => app.comentarios = comentarios)}})
-    //.then(comentarios => app.comentarios = comentarios)
+        .then(response => {
+            return response.json();
+        })
+    .then(comentarios => app.comentarios = comentarios)
     .catch(error => console.log(error));
     //}
 }

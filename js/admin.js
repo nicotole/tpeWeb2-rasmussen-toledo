@@ -13,9 +13,8 @@ function borrarComentario($id){
     fetch('api/comentarios/' + $id,{
         method: 'DELETE'
     })
-    .then(response => {getComentarios();
+    .then( () => {getComentarios();
     })
-    //.then(response => response.json())  .then(comentario => app.comentarios.push(comentario))
     .catch(error => console.log(error));
 }
 
