@@ -16,7 +16,8 @@
                     <input type="number" name="puntuacion" value="{$pelicula->puntuacion}" class="input">
                     <input type="number" name="precio" value="{$pelicula->precio}" class="input">
                     <p>Para remplaza la imagen deberas seleccionar un nuevo archivo</p>
-                    <input type="file" name="imagen" accept="image/jpg, image/jpeg">
+                    <p>Solo se aceptan peliculas en formato "jpg" y "jpeg"</p>
+                    <input type="file" name="imagen" accept=".jpg , .jpeg">
                 </div>
                 <button type="submit" class="botonVisible">Guardar</button>
             </form>
@@ -52,7 +53,8 @@
                 <input type="text" name="duracion" placeholder=" Duracion" class="input" required>
                 <input type="number" name="puntuacion" placeholder=" Puntuacion" class="input" required>
                 <input type="number" name="precio" placeholder=" Precio en Rupias" class="input" required>
-                <input type="file" name="imagen" accept="image/jpg, image/jpeg" required>
+                <p>Solo se aceptan peliculas en formato "jpg" y "jpeg"</p>
+                <input type="file" name="imagen" accept=".jpg , .jpeg" required>
             </div>
             <button type="submit" class="botonVisible">Subir</button>
         </form>

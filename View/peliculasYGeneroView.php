@@ -101,6 +101,7 @@ class peliculasYGeneroView{
         // $this->smarty->assign('UserName_s', $_SESSION['userName']);
         // $this->smarty->assign('superUser_s', $_SESSION['superuser']);
         $this->setUserBasicsToSmarty();
+        //var_dump($pelicula);
         $this->smarty->display('templates/adminPeliculas.tpl');
     }
 
@@ -122,6 +123,8 @@ class peliculasYGeneroView{
         // $this->smarty->assign('UserName_s', $_SESSION['userName']);
         // $this->smarty->assign('superUser_s', $_SESSION['superuser']);
         $this->setUserBasicsToSmarty();
+        //var_dump($peliculasConGenero);
+        //var_dump($peliculasConGenero[0]->imagen);
         $this->smarty->display('templates/adminPeliculas.tpl');
     }
 

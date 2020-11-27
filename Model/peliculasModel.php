@@ -78,7 +78,11 @@ class peliculasModel{
 
     private function uploadImage($image){
         //$target = './imagenes/imagenes-de-usuario/' . uniqid() . '.jpg';
+        // echo $image;
+        // echo "</br>";
         $filePath = './imagenes/imagenes-de-usuario/' . uniqid("", true) .".". strtolower(pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION));
+        // echo $filePath;
+        // echo "</br>";
         move_uploaded_file($image, $filePath);
         return $filePath;
     }
@@ -96,12 +100,15 @@ class peliculasModel{
     
     function EditarPeliculaConImg($titulo, $sinopsis, $duracion, $puntuacion, $precio, $img, $id){
         //echo $img;
-        $this->BorrarImgDeArchivos($titulo);
+        //echo "</br>";
+        //$this->BorrarImgDeArchivos($titulo);
         $genero = $this->db->prepare("SELECT * FROM genero WHERE nombre=?");
         $genero->execute(array($_POST['genero']));
         $arrGenero = $genero->fetchAll(PDO::FETCH_OBJ);
         $imagen = null;
         $imagen = $this->uploadImage($img);
+        //echo "</br>";
+        //print_r($imagen);
         $sentencia = $this->db->prepare("UPDATE peliculas SET titulo=?, sinopsis=?, duracion=?, id_genero=?, puntuacion=?, precio=?, imagen=? WHERE id=?");
         $sentencia->execute(array( $titulo, $sinopsis, $duracion, $arrGenero[0]->id_genero, $puntuacion, $precio, $imagen, $id ));
     }
@@ -132,8 +139,11 @@ class peliculasModel{
 
     private function BorrarImgDeArchivos($titulo_pelicula){
         $Pelicula = $this->GetPelicula($titulo_pelicula);
-        //print_r($Pelicula);
+        // echo "</br>";
+        // print_r($Pelicula);
+        // echo "</br>";
         //print_r($Pelicula->imagen);
+        //echo "</br>";
         $rutaDeImg = $Pelicula->imagen;
         unlink($rutaDeImg);
     }

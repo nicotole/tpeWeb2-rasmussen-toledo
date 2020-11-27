@@ -128,15 +128,16 @@ class peliculasYGeneroController{
     }
     
     function GuardarPelicula($params = null){
+        //print_r($_FILES);
             //revisar si pos esta seteado
         // echo("pase por el controller uhu");
         if(isset($_POST) && !is_null($_POST)){
             //print_r($_POST);
             //print_r($_FILES);
             //print_r($_POST['imagen']);
-            //echo  $_FILES['imagen']['tmp_name'];
+            //echo  $_FILES['imagen']['type'];
             if($_FILES['imagen']['type'] != null){
-                $this->model->EditarPeliculaConImg( $_POST['titulo'] , $_POST['sinopsis'] , $_POST['duracion'] , $_POST['puntuacion'] , $_POST['precio'], $_FILES['imagen']['type'], $params[':ID']);
+                $this->model->EditarPeliculaConImg( $_POST['titulo'] , $_POST['sinopsis'] , $_POST['duracion'] , $_POST['puntuacion'] , $_POST['precio'], $_FILES['imagen']['tmp_name'], $params[':ID']);
             }else{
                 echo "entre al else";
                 $this->model->EditarPelicula( $_POST['titulo'] , $_POST['sinopsis'] , $_POST['duracion'] , $_POST['puntuacion'] , $_POST['precio'], $params[':ID']);
