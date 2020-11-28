@@ -114,15 +114,17 @@ class userController{
 
     function SetNoSuperUsuario($params = null){
         session_start();
+        $id = $params[":ID"];
         if ( isset($_SESSION['email']) && ( $_SESSION['superuser'] == 1 ) ){
-            $id = $params[":ID"];
             $this->model->SetNoSuperUsuario($id);
-            $_SESSION['superuser'] = 0;
-            $this->view->ReLocalizar("home");
-            //header("Location:".BASE_URL."/home");
+            if($id == $_SESSION['id']){
+                $_SESSION['superuser'] = 0;
+                $this->view->ReLocalizar("home");
+            }else{
+                $this->view->ReLocalizar("adminUsuarios");
+            }
         }else{
             $this->view->ReLocalizar("login");
-            //header("Location:".BASE_URL."/login");
         }
     }
 
