@@ -33,7 +33,13 @@ class peliculasYGeneroController{
     function VisualizarItem($params = null){
         $pelicula_titulo = $params[':TITULO'];
         $pelicula_completa = $this->model->GetPelicula($pelicula_titulo);
-        $this->view->ShowItem($pelicula_completa);
+        if($pelicula_completa == true){
+            $this->view->ShowItem($pelicula_completa);
+        }else{
+            echo("no se encontro el elemento crack, hay que hacer esto de informar por pantalla bien");
+        }
+
+        //var_dump($pelicula_completa);
     }
 
     function VisualizarGenero($params = null){

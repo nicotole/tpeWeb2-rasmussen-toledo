@@ -5,16 +5,16 @@
             <form autocomplete="off" class="formularioRegistro" method="POST" action="guardarPelicula/{$pelicula->id}" enctype="multipart/form-data">
                 <div class="inputs">
                 <img src="{$pelicula->imagen}" alt="imgen de la pelicula" class="PeliculasDelUsuario">
-                    <input type="text" name="titulo" value="{$pelicula->titulo}" class="input">
+                    <input type="text" name="titulo" value="{$pelicula->titulo}" class="input" required>
                     <select name="genero">
                     {foreach from=$generos_s item=genero}
                         <option value="{$genero->nombre}">{$genero->nombre}</option>
                     {/foreach}
                     </select>
-                    <input type="text" name="sinopsis" value="{$pelicula->sinopsis}" class="input">
-                    <input type="text" name="duracion" value="{$pelicula->duracion}" class="input">
-                    <input type="number" name="puntuacion" value="{$pelicula->puntuacion}" class="input">
-                    <input type="number" name="precio" value="{$pelicula->precio}" class="input">
+                    <input type="text" name="sinopsis" value="{$pelicula->sinopsis}" class="input" required>
+                    <input type="text" name="duracion" value="{$pelicula->duracion}" class="input" required>
+                    <input type="number"  min="1" max="5" name="puntuacion" value="{$pelicula->puntuacion}" class="input">
+                    <input type="number" min="0" name="precio" value="{$pelicula->precio}" class="input" required>
                     <p>Para remplaza la imagen deberas seleccionar un nuevo archivo</p>
                     <p>Solo se aceptan peliculas en formato "jpg" y "jpeg"</p>
                     <input type="file" name="imagen" accept=".jpg , .jpeg">
@@ -43,7 +43,7 @@
     <article class="contenedorRegistro">
         <form autocomplete="off" class="formularioRegistro" method="POST" action="subirPelicula" enctype="multipart/form-data">
             <div class="inputs">
-                <input type="text" name="titulo" placeholder=" Titulo" class="input">
+                <input type="text" name="titulo" placeholder=" Titulo" class="input" required>
                 <select name="genero">
                     {foreach from=$generos_s item=genero}
                         <option value="{$genero->nombre}">{$genero->nombre}</option>
@@ -51,8 +51,8 @@
                 </select>
                 <input type="text" name="sinopsis" placeholder=" Sinopsis" class="input" required>
                 <input type="text" name="duracion" placeholder=" Duracion" class="input" required>
-                <input type="number" name="puntuacion" placeholder=" Puntuacion" class="input" required>
-                <input type="number" name="precio" placeholder=" Precio en Rupias" class="input" required>
+                <input type="number"  min="1" max="5" name="puntuacion" placeholder=" Puntuacion" class="input" required>
+                <input type="number" min="0" name="precio" placeholder=" Precio en Rupias" class="input" required>
                 <p>Solo se aceptan peliculas en formato "jpg" y "jpeg"</p>
                 <input type="file" name="imagen" accept=".jpg , .jpeg" required>
             </div>
